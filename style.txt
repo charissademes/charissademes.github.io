@@ -1,0 +1,12 @@
+fonts:
+- Gabarito (https://fonts.google.com/specimen/Gabarito)
+
+kleuren:
+- roze (#b5179e)
+- lichtpaars (#7209b7)
+- donkerpaars (#560bad)
+- donkerblauw (#001e60)
+- groen (#10ad0b)
+- blauw (#3a86ff)
+- grijs (#aaaaaa)
+- lichtgrijs (#eeeeee)

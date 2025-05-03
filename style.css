@@ -1,0 +1,132 @@
+@import url('https://fonts.googleapis.com/css2?family=Gabarito:wght@400..900&display=swap');
+
+.gabarito-normal {
+    font-family: "Gabarito", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 200;
+    font-style: normal;
+  }
+
+body {
+    font-family: "Gabarito", sans-serif;
+    font-weight: 400;
+    color: #ffffff;
+    background-color: rgba(58,134,255,0.2);    
+}
+
+.timer {
+    color: #001e60;
+    font-size: 32px;
+}
+
+.column {
+    width: 25%;
+    height: auto;
+
+}
+
+.column-wide {
+    float: left;
+    width: 50%;
+    height: auto;
+    text-align: left;
+}
+  
+/* Clear floats after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+}
+
+.row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    inset: 0px;
+}
+
+.row-header {
+    font-family: "Gabarito", sans-serif;
+    font-weight: 500;
+    font-size: 32px;
+    color: #ffffff;
+}
+
+.row-text {
+    font-family: "Gabarito", sans-serif;
+    font-weight: 400;
+    font-size: 20px;
+    color: #ffffff;
+}
+
+.image-circle-1 {
+    border-radius: 50%;
+    width: 240px;
+    height: 240px;
+    margin: 0 auto;
+    display: block;
+    border: 6px solid #560bad;
+}
+
+.image-circle-2 {
+    border-radius: 50%;
+    width: 240px;
+    height: 240px;
+    margin: 0 auto;
+    display: block;
+    border: 6px solid #7209b7;
+}
+
+.image-circle-3 {
+    border-radius: 50%;
+    width: 240px;
+    height: 240px;
+    margin: 0 auto;
+    display: block;
+    border: 6px solid #b5179e;
+}
+
+.spacing-20px {
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.spacing-10px {
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.table-default {
+    width: 100%;
+    border-collapse: collapse;
+
+}
+
+.tr-default {
+    border: 1px solid #ffffff;
+    border-left-style: none;
+    border-right-style: none;
+    border-top-style: none;
+
+}
+
+.td-default {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    text-align: left;
+}
+
+.td-grey {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    color: #aaaaaa;
+}
