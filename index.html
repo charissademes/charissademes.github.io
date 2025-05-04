@@ -82,7 +82,7 @@
             })
             .then(data => {
                 const records = data.records;
-                let table = '<table><tr><th>Distance</th><th>Time</th><th>Date</th><th>Location</th></tr>';
+                let table = '<table><tr><th>Distance (m)</th><th>Time</th><th>Date</th><th>Location</th></tr>';
                 for (const key in records) {
                     const record = records[key];
                     table += `<tr>
