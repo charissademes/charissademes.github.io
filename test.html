@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Charissa de Mes - Speedskater</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            background-image: url('charissa.png');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-color: rgba(255, 255, 255, 0.6);
+            background-blend-mode: lighten;
+        }
+    </style>
+</head>
+<body class="flex flex-col items-center p-6">
+    <div class="bg-white bg-opacity-80 rounded-xl shadow-lg p-8 max-w-lg w-full">
+        <img src="charissa.png" alt="Charissa de Mes" class="rounded-xl w-full mb-4">
+        <h1 class="text-3xl font-bold text-center mb-2">Charissa de Mes</h1>
+        <p class="text-center mb-4">Charissa de Mes is a talented Dutch speedskater representing Schaats Federatie Alkmaar. Known for her dedication and impressive performances on the ice, she competes in the junior category and continues to improve her personal bests each season.</p>
+        <ul class="text-center mb-4">
+            <li><strong>Age:</strong> 18</li>
+            <li><strong>Category:</strong> Junior</li>
+        </ul>
+        <h2 class="text-2xl font-semibold mb-2 text-center">Personal Records</h2>
+        <div id="records" class="text-center">
+            <p>Loading records...</p>
+        </div>
+    </div>
+
+    <script>
+        async function fetchRecords() {
+            try {
+                const response = await fetch('https://speedskatingresults.com/index.php?p=200&id=92774');
+                const text = await response.text();
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(text, 'text/html');
+
+                const distances = ['500m', '1000m', '1500m', '3000m'];
+                const records = {};
+
+                distances.forEach(distance => {
+                    const recordCell = [...doc.querySelectorAll('td')]
+                        .find(td => td.textContent.includes(distance));
+                    if (recordCell) {
+                        records[distance] = recordCell.nextElementSibling.textContent.trim();
+                    }
+                });
+
+                let recordsHtml = '';
+                for (const [distance, time] of Object.entries(records)) {
+                    recordsHtml += `<p><strong>${distance}:</strong> ${time}</p>`;
+                }
+
+                document.getElementById('records').innerHTML = recordsHtml || '<p>Records not found.</p>';
+            } catch (error) {
+                document.getElementById('records').innerHTML = '<p>Error loading records.</p>';
+                console.error('Error fetching records:', error);
+            }
+        }
+
+        fetchRecords();
+    </script>
+</body>
+</html>
