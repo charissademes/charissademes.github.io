@@ -13,20 +13,36 @@
             background-color: rgba(255, 255, 255, 0.6);
             background-blend-mode: lighten;
             margin: 0;
-            padding: 20px;
+            padding: 0;
             display: flex;
             justify-content: center;
             align-items: flex-start;
             min-height: 100vh;
-            gap: 20px;
         }
-        .container, .chart-container {
+        .wrapper {
+            display: flex;
+            gap: 20px;
+            max-width: 1700px;
+            padding: 20px;
+            align-items: flex-start;
+        }
+        .container {
             max-width: 800px;
             background-color: #001e60;
             padding: 20px;
             border-radius: 15px;
             box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-            color: #dddddd;
+            text-align: center;
+            flex: 1;
+        }
+        .charts-container {
+            max-width: 800px;
+            background-color: #ffffffdd;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            flex: 1;
+            overflow-x: auto;
         }
         img {
             width: 200px;
@@ -43,7 +59,6 @@
             padding: 10px;
             border-radius: 10px;
             overflow-x: auto;
-            color: black;
         }
         table {
             width: 100%;
@@ -54,39 +69,47 @@
             padding: 8px;
             border: 1px solid #ccc;
             text-align: left;
-            color: black;
         }
         th {
             background-color: #aaaaaa;
         }
-        canvas {
-            background-color: white;
-            border-radius: 10px;
-            margin-bottom: 20px;
+        .grey-text {
+            color: #dddddd;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <img src="/media/charissa.png" alt="Charissa de Mes">
-        <h1>Charissa de Mes</h1>
-        <p><strong>Age:</strong> 16</p>
-        <p><strong>Category:</strong> Ladies Junior B2</p>
-        <p>Charissa de Mes is a dedicated speedskater known for her relentless determination and consistent year-over-year improvement. With each season, she continues to sharpen her technique and achieve faster times.</p>
-        <hr>
-        <h2>Personal Records</h2>
-        <div id="output">Loading personal records...</div>
-    </div>
+    <div class="wrapper">
+        <div class="container">
+            <div class="grey-text">
+                <img src="/media/charissa.png" alt="Charissa de Mes">
+                <h1>Charissa de Mes</h1>
+                <p><strong>Age:</strong> 16</p>
+                <p><strong>Category:</strong> Ladies Junior B2</p>
+                <p>Charissa de Mes is a dedicated speedskater known for her relentless determination and consistent year-over-year improvement. With each season, she continues to sharpen her technique and achieve faster times.</p>
+                <hr size="-1">
+                <h2>Personal Records</h2>
+            </div>
+            <div id="output">Loading personal records...</div>
+        </div>
 
-    <div class="chart-container">
-        <h2>500m</h2>
-        <canvas id="resultsChart500" width="400" height="200"></canvas>
-        <h2>1000m</h2>
-        <canvas id="resultsChart1000" width="400" height="200"></canvas>
-        <h2>1500m</h2>
-        <canvas id="resultsChart1500" width="400" height="200"></canvas>
-        <h2>3000m</h2>
-        <canvas id="resultsChart3000" width="400" height="200"></canvas>
+        <div class="charts-container">
+            <h2>500m</h2>
+            <hr size="-1">
+            <canvas id="resultsChart500"></canvas>
+            <br>
+            <h2>1000m</h2>
+            <hr size="-1">
+            <canvas id="resultsChart1000"></canvas>
+            <br>
+            <h2>1500m</h2>
+            <hr size="-1">
+            <canvas id="resultsChart1500"></canvas>
+            <br>
+            <h2>3000m</h2>
+            <hr size="-1">
+            <canvas id="resultsChart3000"></canvas>
+        </div>
     </div>
 
     <script>
@@ -107,71 +130,98 @@
                 table += '</table>';
                 document.getElementById('output').innerHTML = table;
             })
-            .catch(() => {
+            .catch(error => {
+                console.error('Error fetching data:', error);
                 document.getElementById('output').innerText = 'Failed to fetch data';
             });
 
-        const distances = [500, 1000, 1500, 3000];
-        const colors = ['#b5179e', '#001e60', '#7209b7', '#560bad'];
+            function parseTimeToSeconds(timeStr) {
+        timeStr = timeStr.replace(',', '.');
+        let totalSeconds = 0;
+        const parts = timeStr.split('.');
 
-        distances.forEach((distance, index) => {
-            fetch(`https://speedskatingresults.com/api/json/skater_results.php?skater=92774&distance=${distance}`)
-                .then(response => response.json())
-                .then(data => {
-                    if (!data.results) return;
+        if (parts.length === 3) {
+            // min.sec.ms → 1.27.15 → 1m,27s,15ms
+            const min = parseInt(parts[0]);
+            const sec = parseInt(parts[1]);
+            const ms = parseInt(parts[2]);
+            totalSeconds = min * 60 + sec + ms / 100;
+        } else if (parts.length === 2) {
+            // sec.ms → 45.10 → 45s,10ms
+            const sec = parseInt(parts[0]);
+            const ms = parseInt(parts[1]);
+            totalSeconds = sec + ms / 100;
+        } else {
+            totalSeconds = parseFloat(timeStr);
+        }
+        return parseFloat(totalSeconds.toFixed(2));
+    }
 
-                    data.results.sort((a, b) => new Date(a.date) - new Date(b.date));
+    function formatSecondsToTime(totalSeconds) {
+        const min = Math.floor(totalSeconds / 60);
+        const sec = Math.floor(totalSeconds % 60);
+        const ms = Math.round((totalSeconds - Math.floor(totalSeconds)) * 100);
+        if (totalSeconds >= 60) {
+            return `${min}:${sec.toString().padStart(2, '0')},${ms.toString().padStart(2, '0')}`;
+        } else {
+            return `${sec},${ms.toString().padStart(2, '0')}`;
+        }
+    }
 
-                    const labels = [], times = [], locations = [];
-                    data.results.forEach(result => {
-                        labels.push(result.date);
-                        locations.push(result.location);
-                        let timeStr = result.time.replace(',', '.');
-                        let totalSeconds = timeStr.includes(':') ? 
-                            timeStr.split(':').reduce((m, s) => parseInt(m) * 60 + parseFloat(s)) : 
-                            parseFloat(timeStr);
-                        times.push(parseFloat(totalSeconds.toFixed(2)));
-                    });
+    async function fetchAndRenderChart(distance, chartId, color) {
+        const response = await fetch(`https://speedskatingresults.com/api/json/skater_results.php?skater=92774&distance=${distance}`);
+        const data = await response.json();
 
-                    new Chart(document.getElementById(`resultsChart${distance}`).getContext('2d'), {
-                        type: 'line',
-                        data: {
-                            labels,
-                            datasets: [{
-                                label: 'Tijd (seconden)',
-                                data: times,
-                                customData: locations,
-                                borderColor: colors[index],
-                                borderWidth: 2,
-                                fill: false,
-                                tension: 0.1
-                            }]
-                        },
-                        options: {
-                            plugins: {
-                                tooltip: {
-                                    callbacks: {
-                                        label: function(context) {
-                                            const totalSec = context.raw;
-                                            const location = context.dataset.customData[context.dataIndex];
-                                            let min = Math.floor(totalSec / 60);
-                                            let sec = Math.floor(totalSec % 60);
-                                            let ms = Math.round((totalSec - Math.floor(totalSec)) * 100);
-                                            let timeFormatted = totalSec >= 60 ? `${min}.${String(sec).padStart(2,'0')},${String(ms).padStart(2,'0')}` : `${sec},${String(ms).padStart(2,'0')}`;
-                                            return [`Tijd: ${timeFormatted}`, `Locatie: ${location}`];
-                                        }
-                                    }
-                                },
-                                legend: { labels: { font: { family: 'Gabarito' } } }
-                            },
-                            scales: {
-                                x: { ticks: { maxTicksLimit: 10 } },
-                                y: { beginAtZero: false }
-                            }
-                        }
-                    });
-                });
+        if (!data.results || data.results.length === 0) return;
+
+        data.results.sort((a, b) => new Date(a.date) - new Date(b.date));
+        const labels = [], times = [], locations = [];
+        data.results.forEach(result => {
+            labels.push(result.date);
+            locations.push(result.location);
+            const totalSeconds = parseTimeToSeconds(result.time);
+            times.push(totalSeconds);
         });
+
+        const ctx = document.getElementById(chartId).getContext('2d');
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Time (s)',
+                    data: times,
+                    borderColor: color,
+                    fill: false,
+                    tension: 0.1
+                }]
+            },
+            options: {
+                plugins: {
+                    tooltip: {
+                        callbacks: {
+                            label: context => {
+                                const totalSec = context.raw;
+                                const formattedTime = formatSecondsToTime(totalSec);
+                                return `Time: ${formattedTime}`;
+                            },
+                            afterLabel: context => `Location: ${locations[context.dataIndex]}`
+                        }
+                    },
+                    legend: { labels: { font: { family: 'Gabarito' } } }
+                },
+                scales: {
+                    x: { ticks: { autoSkip: true, maxTicksLimit: 10, font: { family: 'Gabarito' } }},
+                    y: { beginAtZero: false, title: { display: true, text: 'Seconds', font: { family: 'Gabarito' } } }
+                }
+            }
+        });
+    }
+
+    fetchAndRenderChart(500, 'resultsChart500', '#b5179e');
+    fetchAndRenderChart(1000, 'resultsChart1000', '#001e60');
+    fetchAndRenderChart(1500, 'resultsChart1500', '#7209b7');
+    fetchAndRenderChart(3000, 'resultsChart3000', '#560bad');
     </script>
 </body>
 </html>
