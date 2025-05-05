@@ -26,14 +26,19 @@
             padding: 20px;
             align-items: flex-start;
         }
-        .container {
+        .left-section {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            flex: 1;
             max-width: 800px;
+        }
+        .container {
             background-color: #001e60;
             padding: 20px;
             border-radius: 15px;
             box-shadow: 0 4px 10px rgba(0,0,0,0.3);
             text-align: center;
-            flex: 1;
         }
         .charts-container {
             max-width: 800px;
@@ -80,18 +85,26 @@
 </head>
 <body>
     <div class="wrapper">
-        <div class="container">
-            <div class="grey-text">
-                <img src="/media/charissa.png" alt="Charissa de Mes">
-                <h1>Charissa de Mes</h1>
-                <p><strong>Leeftijd:</strong> 16 jaar</p>
-                <p><strong>Categorie:</strong> Dames Junioren B2</p>
-                <p>Charissa is een gepassioneerde schaatsster met een sterke motivatie en tomeloze gedrevenheid. Jaar na jaar weet zij haar persoonlijke tijden te verbeteren, dankzij haar enorme doorzettingsvermogen en vastberadenheid. Dit seizoen werkt Charissa hard om haar grote doel te bereiken: deelname aan het NK schaatsen voor junioren. Met haar toewijding en groeiende prestaties is ze goed op weg om die droom waar te maken.</p>
-                <hr size="-1">
-                <h2>Persoonlijke records</h2>
+        <div class="left-section">
+            <div class="container">
+                <div class="grey-text">
+                    <img src="/media/charissa.png" alt="Charissa de Mes">
+                    <h1>Charissa de Mes</h1>
+                    <p><strong>Leeftijd:</strong> 16 jaar</p>
+                    <p><strong>Categorie:</strong> Dames Junioren B2</p>
+                    <p>Charissa is een gepassioneerde schaatsster met een sterke motivatie en tomeloze gedrevenheid. Jaar na jaar weet zij haar persoonlijke tijden te verbeteren, dankzij haar enorme doorzettingsvermogen en vastberadenheid. Dit seizoen werkt Charissa hard om haar grote doel te bereiken: deelname aan het NK schaatsen voor junioren. Met haar toewijding en groeiende prestaties is ze goed op weg om die droom waar te maken.</p>
+                    <hr size="-1">
+                    <h2>Persoonlijke records</h2>
+                </div>
+                <div id="output">Ophalen persoonlijke records...</div>
             </div>
-            <div id="output">Ophalen persoonlijke records...</div>
+
+            <div class="container">
+                <h2 class="grey-text">Sponsors</h2>
+            </div>
         </div>
+
+        
 
         <div class="charts-container">
             <h2>500m</h2>
