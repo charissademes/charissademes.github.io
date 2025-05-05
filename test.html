@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Speedskating Results Chart</title>
+    <link href="https://fonts.googleapis.com/css2?family=Gabarito&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: 'Gabarito', sans-serif;
+        }
+    </style>
+</head>
+<body>
+    <h2>500m</h2>
+    <hr size="-1">
+    <canvas id="resultsChart500" width="800" height="400"></canvas>
+    <br>
+    <h2>1000m</h2>
+    <hr size="-1">
+    <canvas id="resultsChart1000" width="800" height="400"></canvas>
+    <br>
+    <h2>1500m</h2>
+    <hr size="-1">
+    <canvas id="resultsChart1500" width="800" height="400"></canvas>
+    <br>
+    <h2>3000m</h2>
+    <hr size="-1">
+    <canvas id="resultsChart3000" width="800" height="400"></canvas>
+
+
+    <script>
+        async function fetchAndRenderChart() {
+            const response = await fetch("https://speedskatingresults.com/api/json/skater_results.php?skater=92774&distance=500");
+            const data = await response.json();
+
+            if (!data.results || data.results.length === 0) {
+                console.error("No results found");
+                return;
+            }
+
+            data.results.sort((a, b) => new Date(a.date) - new Date(b.date));
+
+            const labels = [];
+            const times = [];
+            const locations = [];
+            const rawTimes = [];
+
+            data.results.forEach(result => {
+                labels.push(result.date);
+                locations.push(result.location);
+
+                let totalSeconds = 0;
+                let timeStr = result.time.replace(',', '.');
+
+                if (timeStr.includes(':')) {
+                    const [min, secFrac] = timeStr.split(':');
+                    totalSeconds = parseInt(min) * 60 + parseFloat(secFrac);
+                } else if (timeStr.includes('.')) {
+                    const parts = timeStr.split('.');
+                    if (parts.length === 3) {
+                        const [min, sec, frac] = parts;
+                        totalSeconds = parseInt(min) * 60 + parseInt(sec) + parseInt(frac) / 100;
+                    } else if (parts.length === 2) {
+                        const [sec, frac] = parts;
+                        totalSeconds = parseInt(sec) + parseInt(frac) / 100;
+                    } else {
+                        totalSeconds = parseFloat(timeStr);
+                    }
+                } else {
+                    totalSeconds = parseFloat(timeStr);
+                }
+
+                times.push(parseFloat(totalSeconds.toFixed(2)));
+                rawTimes.push(totalSeconds);
+            });
+
+            const ctx = document.getElementById('resultsChart500').getContext('2d');
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Tijd (seconden)',
+                        data: times,
+                        customData: locations,
+                        borderColor: '#b5179e',
+                        rawTimes: rawTimes,
+                        borderWidth: 2,
+                        fill: false,
+                        tension: 0.1
+                    }]
+                },
+                options: {
+                    plugins: {
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    const totalSec = context.raw;
+                                    const location = context.dataset.customData[context.dataIndex];
+
+                                    let min = Math.floor(totalSec / 60);
+                                    let sec = Math.floor(totalSec % 60);
+                                    let ms = Math.round((totalSec - Math.floor(totalSec)) * 100);
+
+                                    let timeFormatted = '';
+
+                                    if (totalSec >= 60) {
+                                        timeFormatted = `${min}.${sec.toString().padStart(2, '0')},${ms.toString().padStart(2, '0')}`;
+                                    } else {
+                                        timeFormatted = `${sec},${ms.toString().padStart(2, '0')}`;
+                                    }
+
+                                    return [`Tijd: ${timeFormatted}`, `Locatie: ${location}`];
+                                }
+                            },
+                            titleFont: { family: 'Gabarito' },
+                            bodyFont: { family: 'Gabarito' }
+                        },
+                        legend: {
+                            labels: { font: { family: 'Gabarito' } }
+                        }
+                    },
+                    scales: {
+                        x: { 
+                            title: { display: false, text: 'Datum', font: { family: 'Gabarito' } },
+                            ticks: { autoSkip: true, maxTicksLimit: 20, font: { family: 'Gabarito' } }
+                        },
+                        y: { 
+                            title: { display: true, text: 'Seconden', font: { family: 'Gabarito' } },
+                            ticks: { font: { family: 'Gabarito' } },
+                            beginAtZero: false 
+                        }
+                    }
+                }
+            });
+        }
+
+        fetchAndRenderChart();
+    </script>
+
+    <script>
+        async function fetchAndRenderChart() {
+            const response = await fetch("https://speedskatingresults.com/api/json/skater_results.php?skater=92774&distance=1000");
+            const data = await response.json();
+
+            if (!data.results || data.results.length === 0) {
+                console.error("No results found");
+                return;
+            }
+
+            data.results.sort((a, b) => new Date(a.date) - new Date(b.date));
+
+            const labels = [];
+            const times = [];
+            const locations = [];
+            const rawTimes = [];
+
+            data.results.forEach(result => {
+                labels.push(result.date);
+                locations.push(result.location);
+
+                let totalSeconds = 0;
+                let timeStr = result.time.replace(',', '.');
+
+                if (timeStr.includes(':')) {
+                    const [min, secFrac] = timeStr.split(':');
+                    totalSeconds = parseInt(min) * 60 + parseFloat(secFrac);
+                } else if (timeStr.includes('.')) {
+                    const parts = timeStr.split('.');
+                    if (parts.length === 3) {
+                        const [min, sec, frac] = parts;
+                        totalSeconds = parseInt(min) * 60 + parseInt(sec) + parseInt(frac) / 100;
+                    } else if (parts.length === 2) {
+                        const [sec, frac] = parts;
+                        totalSeconds = parseInt(sec) + parseInt(frac) / 100;
+                    } else {
+                        totalSeconds = parseFloat(timeStr);
+                    }
+                } else {
+                    totalSeconds = parseFloat(timeStr);
+                }
+
+                times.push(parseFloat(totalSeconds.toFixed(2)));
+                rawTimes.push(totalSeconds);
+            });
+
+            const ctx = document.getElementById('resultsChart1000').getContext('2d');
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Tijd (seconden)',
+                        data: times,
+                        customData: locations,
+                        borderColor: '#001e60',
+                        rawTimes: rawTimes,
+                        borderWidth: 2,
+                        fill: false,
+                        tension: 0.1
+                    }]
+                },
+                options: {
+                    plugins: {
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    const totalSec = context.raw;
+                                    const location = context.dataset.customData[context.dataIndex];
+
+                                    let min = Math.floor(totalSec / 60);
+                                    let sec = Math.floor(totalSec % 60);
+                                    let ms = Math.round((totalSec - Math.floor(totalSec)) * 100);
+
+                                    let timeFormatted = '';
+
+                                    if (totalSec >= 60) {
+                                        timeFormatted = `${min}.${sec.toString().padStart(2, '0')},${ms.toString().padStart(2, '0')}`;
+                                    } else {
+                                        timeFormatted = `${sec},${ms.toString().padStart(2, '0')}`;
+                                    }
+
+                                    return [`Tijd: ${timeFormatted}`, `Locatie: ${location}`];
+                                }
+                            },
+                            titleFont: { family: 'Gabarito' },
+                            bodyFont: { family: 'Gabarito' }
+                        },
+                        legend: {
+                            labels: { font: { family: 'Gabarito' } }
+                        }
+                    },
+                    scales: {
+                        x: { 
+                            title: { display: false, text: 'Datum', font: { family: 'Gabarito' } },
+                            ticks: { autoSkip: true, maxTicksLimit: 20, font: { family: 'Gabarito' } }
+                        },
+                        y: { 
+                            title: { display: true, text: 'Seconden', font: { family: 'Gabarito' } },
+                            ticks: { font: { family: 'Gabarito' } },
+                            beginAtZero: false 
+                        }
+                    }
+                }
+            });
+        }
+
+        fetchAndRenderChart();
+    </script>
+
+    <script>
+        async function fetchAndRenderChart() {
+            const response = await fetch("https://speedskatingresults.com/api/json/skater_results.php?skater=92774&distance=1500");
+            const data = await response.json();
+
+            if (!data.results || data.results.length === 0) {
+                console.error("No results found");
+                return;
+            }
+
+            data.results.sort((a, b) => new Date(a.date) - new Date(b.date));
+
+            const labels = [];
+            const times = [];
+            const locations = [];
+            const rawTimes = [];
+
+            data.results.forEach(result => {
+                labels.push(result.date);
+                locations.push(result.location);
+
+                let totalSeconds = 0;
+                let timeStr = result.time.replace(',', '.');
+
+                if (timeStr.includes(':')) {
+                    const [min, secFrac] = timeStr.split(':');
+                    totalSeconds = parseInt(min) * 60 + parseFloat(secFrac);
+                } else if (timeStr.includes('.')) {
+                    const parts = timeStr.split('.');
+                    if (parts.length === 3) {
+                        const [min, sec, frac] = parts;
+                        totalSeconds = parseInt(min) * 60 + parseInt(sec) + parseInt(frac) / 100;
+                    } else if (parts.length === 2) {
+                        const [sec, frac] = parts;
+                        totalSeconds = parseInt(sec) + parseInt(frac) / 100;
+                    } else {
+                        totalSeconds = parseFloat(timeStr);
+                    }
+                } else {
+                    totalSeconds = parseFloat(timeStr);
+                }
+
+                times.push(parseFloat(totalSeconds.toFixed(2)));
+                rawTimes.push(totalSeconds);
+            });
+
+            const ctx = document.getElementById('resultsChart1500').getContext('2d');
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Tijd (seconden)',
+                        data: times,
+                        customData: locations,
+                        borderColor: '#7209b7',
+                        rawTimes: rawTimes,
+                        borderWidth: 2,
+                        fill: false,
+                        tension: 0.1
+                    }]
+                },
+                options: {
+                    plugins: {
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    const totalSec = context.raw;
+                                    const location = context.dataset.customData[context.dataIndex];
+
+                                    let min = Math.floor(totalSec / 60);
+                                    let sec = Math.floor(totalSec % 60);
+                                    let ms = Math.round((totalSec - Math.floor(totalSec)) * 100);
+
+                                    let timeFormatted = '';
+
+                                    if (totalSec >= 60) {
+                                        timeFormatted = `${min}.${sec.toString().padStart(2, '0')},${ms.toString().padStart(2, '0')}`;
+                                    } else {
+                                        timeFormatted = `${sec},${ms.toString().padStart(2, '0')}`;
+                                    }
+
+                                    return [`Tijd: ${timeFormatted}`, `Locatie: ${location}`];
+                                }
+                            },
+                            titleFont: { family: 'Gabarito' },
+                            bodyFont: { family: 'Gabarito' }
+                        },
+                        legend: {
+                            labels: { font: { family: 'Gabarito' } }
+                        }
+                    },
+                    scales: {
+                        x: { 
+                            title: { display: false, text: 'Datum', font: { family: 'Gabarito' } },
+                            ticks: { autoSkip: true, maxTicksLimit: 20, font: { family: 'Gabarito' } }
+                        },
+                        y: { 
+                            title: { display: true, text: 'Seconden', font: { family: 'Gabarito' } },
+                            ticks: { font: { family: 'Gabarito' } },
+                            beginAtZero: false 
+                        }
+                    }
+                }
+            });
+        }
+
+        fetchAndRenderChart();
+    </script>
+
+    <script>
+        async function fetchAndRenderChart() {
+            const response = await fetch("https://speedskatingresults.com/api/json/skater_results.php?skater=92774&distance=3000");
+            const data = await response.json();
+
+            if (!data.results || data.results.length === 0) {
+                console.error("No results found");
+                return;
+            }
+
+            data.results.sort((a, b) => new Date(a.date) - new Date(b.date));
+
+            const labels = [];
+            const times = [];
+            const locations = [];
+            const rawTimes = [];
+
+            data.results.forEach(result => {
+                labels.push(result.date);
+                locations.push(result.location);
+
+                let totalSeconds = 0;
+                let timeStr = result.time.replace(',', '.');
+
+                if (timeStr.includes(':')) {
+                    const [min, secFrac] = timeStr.split(':');
+                    totalSeconds = parseInt(min) * 60 + parseFloat(secFrac);
+                } else if (timeStr.includes('.')) {
+                    const parts = timeStr.split('.');
+                    if (parts.length === 3) {
+                        const [min, sec, frac] = parts;
+                        totalSeconds = parseInt(min) * 60 + parseInt(sec) + parseInt(frac) / 100;
+                    } else if (parts.length === 2) {
+                        const [sec, frac] = parts;
+                        totalSeconds = parseInt(sec) + parseInt(frac) / 100;
+                    } else {
+                        totalSeconds = parseFloat(timeStr);
+                    }
+                } else {
+                    totalSeconds = parseFloat(timeStr);
+                }
+
+                times.push(parseFloat(totalSeconds.toFixed(2)));
+                rawTimes.push(totalSeconds);
+            });
+
+            const ctx = document.getElementById('resultsChart3000').getContext('2d');
+            new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Tijd (seconden)',
+                        data: times,
+                        customData: locations,
+                        borderColor: '#560bad',
+                        rawTimes: rawTimes,
+                        borderWidth: 2,
+                        fill: false,
+                        tension: 0.1
+                    }]
+                },
+                options: {
+                    plugins: {
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    const totalSec = context.raw;
+                                    const location = context.dataset.customData[context.dataIndex];
+
+                                    let min = Math.floor(totalSec / 60);
+                                    let sec = Math.floor(totalSec % 60);
+                                    let ms = Math.round((totalSec - Math.floor(totalSec)) * 100);
+
+                                    let timeFormatted = '';
+
+                                    if (totalSec >= 60) {
+                                        timeFormatted = `${min}.${sec.toString().padStart(2, '0')},${ms.toString().padStart(2, '0')}`;
+                                    } else {
+                                        timeFormatted = `${sec},${ms.toString().padStart(2, '0')}`;
+                                    }
+
+                                    return [`Tijd: ${timeFormatted}`, `Locatie: ${location}`];
+                                }
+                            },
+                            titleFont: { family: 'Gabarito' },
+                            bodyFont: { family: 'Gabarito' }
+                        },
+                        legend: {
+                            labels: { font: { family: 'Gabarito' } }
+                        }
+                    },
+                    scales: {
+                        x: { 
+                            title: { display: false, text: 'Datum', font: { family: 'Gabarito' } },
+                            ticks: { autoSkip: true, maxTicksLimit: 20, font: { family: 'Gabarito' } }
+                        },
+                        y: { 
+                            title: { display: true, text: 'Seconden', font: { family: 'Gabarito' } },
+                            ticks: { font: { family: 'Gabarito' } },
+                            beginAtZero: false 
+                        }
+                    }
+                }
+            });
+        }
+
+        fetchAndRenderChart();
+    </script>
+
+
+</body>
+</html>

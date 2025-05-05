@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Charissa de Mes - Speedskater</title>
+    <link href="https://fonts.googleapis.com/css2?family=Gabarito&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: 'Gabarito', Arial, sans-serif;
+            background: url('/media/charissa_cartoon.png') no-repeat center center fixed;
+            background-size: cover;
+            background-color: rgba(255, 255, 255, 0.6);
+            background-blend-mode: lighten;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+            gap: 20px;
+        }
+        .container, .chart-container {
+            max-width: 800px;
+            background-color: #001e60;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            color: #dddddd;
+        }
+        img {
+            width: 200px;
+            height: auto;
+            border-radius: 20px;
+            margin-bottom: 20px;
+        }
+        h1, h2 {
+            margin-bottom: 10px;
+        }
+        #output {
+            text-align: left;
+            background-color: #dddddd;
+            padding: 10px;
+            border-radius: 10px;
+            overflow-x: auto;
+            color: black;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        th, td {
+            padding: 8px;
+            border: 1px solid #ccc;
+            text-align: left;
+            color: black;
+        }
+        th {
+            background-color: #aaaaaa;
+        }
+        canvas {
+            background-color: white;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="/media/charissa.png" alt="Charissa de Mes">
+        <h1>Charissa de Mes</h1>
+        <p><strong>Age:</strong> 16</p>
+        <p><strong>Category:</strong> Ladies Junior B2</p>
+        <p>Charissa de Mes is a dedicated speedskater known for her relentless determination and consistent year-over-year improvement. With each season, she continues to sharpen her technique and achieve faster times.</p>
+        <hr>
+        <h2>Personal Records</h2>
+        <div id="output">Loading personal records...</div>
+    </div>
+
+    <div class="chart-container">
+        <h2>500m</h2>
+        <canvas id="resultsChart500" width="400" height="200"></canvas>
+        <h2>1000m</h2>
+        <canvas id="resultsChart1000" width="400" height="200"></canvas>
+        <h2>1500m</h2>
+        <canvas id="resultsChart1500" width="400" height="200"></canvas>
+        <h2>3000m</h2>
+        <canvas id="resultsChart3000" width="400" height="200"></canvas>
+    </div>
+
+    <script>
+        fetch('https://speedskatingresults.com/api/json/personal_records.php?skater=92774')  
+            .then(response => response.json())
+            .then(data => {
+                const records = data.records;
+                let table = '<table><tr><th>Distance (m)</th><th>Time</th><th>Date</th><th>Location</th></tr>';
+                for (const key in records) {
+                    const record = records[key];
+                    table += `<tr>
+                        <td>${record.distance}</td>
+                        <td>${record.time}</td>
+                        <td>${record.date}</td>
+                        <td>${record.location}</td>
+                    </tr>`;
+                }
+                table += '</table>';
+                document.getElementById('output').innerHTML = table;
+            })
+            .catch(() => {
+                document.getElementById('output').innerText = 'Failed to fetch data';
+            });
+
+        const distances = [500, 1000, 1500, 3000];
+        const colors = ['#b5179e', '#001e60', '#7209b7', '#560bad'];
+
+        distances.forEach((distance, index) => {
+            fetch(`https://speedskatingresults.com/api/json/skater_results.php?skater=92774&distance=${distance}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (!data.results) return;
+
+                    data.results.sort((a, b) => new Date(a.date) - new Date(b.date));
+
+                    const labels = [], times = [], locations = [];
+                    data.results.forEach(result => {
+                        labels.push(result.date);
+                        locations.push(result.location);
+                        let timeStr = result.time.replace(',', '.');
+                        let totalSeconds = timeStr.includes(':') ? 
+                            timeStr.split(':').reduce((m, s) => parseInt(m) * 60 + parseFloat(s)) : 
+                            parseFloat(timeStr);
+                        times.push(parseFloat(totalSeconds.toFixed(2)));
+                    });
+
+                    new Chart(document.getElementById(`resultsChart${distance}`).getContext('2d'), {
+                        type: 'line',
+                        data: {
+                            labels,
+                            datasets: [{
+                                label: 'Tijd (seconden)',
+                                data: times,
+                                customData: locations,
+                                borderColor: colors[index],
+                                borderWidth: 2,
+                                fill: false,
+                                tension: 0.1
+                            }]
+                        },
+                        options: {
+                            plugins: {
+                                tooltip: {
+                                    callbacks: {
+                                        label: function(context) {
+                                            const totalSec = context.raw;
+                                            const location = context.dataset.customData[context.dataIndex];
+                                            let min = Math.floor(totalSec / 60);
+                                            let sec = Math.floor(totalSec % 60);
+                                            let ms = Math.round((totalSec - Math.floor(totalSec)) * 100);
+                                            let timeFormatted = totalSec >= 60 ? `${min}.${String(sec).padStart(2,'0')},${String(ms).padStart(2,'0')}` : `${sec},${String(ms).padStart(2,'0')}`;
+                                            return [`Tijd: ${timeFormatted}`, `Locatie: ${location}`];
+                                        }
+                                    }
+                                },
+                                legend: { labels: { font: { family: 'Gabarito' } } }
+                            },
+                            scales: {
+                                x: { ticks: { maxTicksLimit: 10 } },
+                                y: { beginAtZero: false }
+                            }
+                        }
+                    });
+                });
+        });
+    </script>
+</body>
+</html>
