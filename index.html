@@ -27,12 +27,13 @@
             align-items: flex-start;
         }
         .left-section {
-            display: flex;
-            flex-direction: column;
-            gap: 20px;
-            flex: 1;
-            max-width: 800px;
-        }
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    max-width: 800px;
+    box-sizing: border-box;
+}
         .container {
             background-color: #001e60dd;
             padding: 20px;
@@ -41,14 +42,14 @@
             text-align: center;
         }
         .charts-container {
-            max-width: 800px;
-            background-color: #ffffffdd;
-            padding: 20px;
-            border-radius: 15px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-            flex: 1;
-            overflow-x: auto;
-        }
+    width: 100%;
+    max-width: 800px;
+    background-color: #ffffffdd;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    box-sizing: border-box;
+}
         img {
             width: 200px;
             height: auto;
@@ -80,18 +81,22 @@
         }
         .grey-text {
             color: #ffffff;
-        }
-        
+        }        
         @media (max-width: 1170px) {
             .wrapper {
                 flex-direction: column;
                 align-items: center;
+                width: 100%;
             }
             .left-section, .charts-container {
                 width: 100%;
                 max-width: 800px;
             }
         }
+    .charts-container canvas {
+        width: 100% !important;
+        height: auto !important;
+    }
     </style>
 </head>
 <body>
