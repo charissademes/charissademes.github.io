@@ -1,4 +1,4 @@
-name: Fetch competitions for Charissa de Mes
+name: fetch-competitions-for-charissa-de-mes
 
 on:
   schedule:
