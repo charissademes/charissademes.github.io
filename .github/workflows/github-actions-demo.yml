@@ -43,9 +43,6 @@ jobs:
                   const competitorsRes = await axios.get('https://inschrijven.schaatsen.nl/api/competitions/' + comp.id + '/competitors');
                   const competitors = competitorsRes.data;
 
-                  console.log('Competition ID:', comp.id);
-                  console.log('Competitors response:', JSON.stringify(competitors, null, 2));
-
                   if (Array.isArray(competitors) && competitors.some(c => c.licenseKey === '10236341')) {
                     matchingCompetitions.push(comp);
                   }
