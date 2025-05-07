@@ -1,4 +1,4 @@
-name: Fetch Competitions
+name: fetch-competitions-for-charissa-de-mes
 
 on:
   schedule:
@@ -77,7 +77,11 @@ jobs:
                     }
 
                     if (!found) {
-                      console.log(`No match for competition: ${competition.name}`);
+                      console.log(`(-) No match for competition: ${competition.name}`);
+                    }
+
+                    if (found) {
+                      console.log(`(x) Match for competition: ${competition.name}`);
                     }
 
                   } catch (err) {
