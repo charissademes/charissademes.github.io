@@ -75,6 +75,10 @@ jobs:
                     if (!found) {
                       console.log(`No match for competition: ${competition.name}`);
                     }
+                    
+                    if (found) {
+                      console.log(`Match for competition: ${competition.name}`);
+                    }
 
                   } catch (err) {
                     console.error('Failed to fetch competitors for competition ' + comp.id + ':', err.message);
