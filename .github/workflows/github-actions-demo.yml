@@ -1,18 +1,51 @@
-name: GitHub Actions Demo
-run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
-on: [push]
+name: Fetch Competitions
+
+on:
+  schedule:
+    - cron: '0 2 * * *'  # Runs daily at 2 AM UTC
+  workflow_dispatch:      # Allows manual trigger
+
 jobs:
-  Explore-GitHub-Actions:
+  fetch-competitions:
     runs-on: ubuntu-latest
+
     steps:
-      - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
-      - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
-      - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
-      - name: Check out repository code
-        uses: actions/checkout@v4
-      - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
-      - run: echo "🖥️ The workflow is now ready to test your code on the runner."
-      - name: List files in the repository
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
+      - name: Install axios
+        run: npm install axios
+
+      - name: Fetch competitions and save to file
         run: |
-          ls ${{ github.workspace }}
-      - run: echo "🍏 This job's status is ${{ job.status }}."
+          node <<'EOF'
+          const fs = require('fs');
+          const axios = require('axios');
+
+          axios.get('https://inschrijven.schaatsen.nl/api/competitions')
+            .then(response => {
+              const competitions = response.data.filter(c => 
+                c.competitors && c.competitors.some(comp => comp.id === 10236341)
+              );
+              fs.mkdirSync('./data', { recursive: true });
+              fs.writeFileSync('./data/competitions.json', JSON.stringify(competitions, null, 2));
+              console.log('Competitions saved to data/competitions.json');
+            })
+            .catch(error => {
+              console.error('Error fetching competitions:', error);
+              process.exit(1);
+            });
+          EOF
+
+      - name: Commit and push changes
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add data/competitions.json
+          git commit -m "Update competitions.json"
+          git push
