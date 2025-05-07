@@ -33,51 +33,54 @@ jobs:
           const axios = require('axios');
 
           async function fetchCompetitions() {
-            const matchingCompetitions = [];
+            const filterName = 'Charissa de Mes';
+            const matchingGames = [];
 
             try {
               const res = await axios.get('https://inschrijven.schaatsen.nl/api/competitions');
-              const competitions = res.data.filter(c =>
-                c.discipline === 'SpeedSkating.LongTrack'
-              );
+              const competitions = res.data;
 
               for (const comp of competitions) {
                 try {
-                  const distancesRes = await axios.get('https://inschrijven.schaatsen.nl/api/competitions/' + comp.id + '/distancecombinations');
-                  const distances = distancesRes.data;
+                  const competitionDetailRes = await axios.get('https://inschrijven.schaatsen.nl/api/competitions/' + comp.id);
+                  const games = competitionDetailRes.data;
 
-                  let counter = 0;
+                  for (const game of games) {
+                    try {
+                      const competitorsRes = await axios.get('https://inschrijven.schaatsen.nl/api/competitions/' + comp.id + '/competitors');
+                      const competitors = competitorsRes.data;
 
-                  for (const distance of distances) {
-                    if (distance.categoryFilter === '*' || distance.categoryFilter.startsWith('DB')) {
-                      try {
-                        const distanceDetailRes = await axios.get('https://inschrijven.schaatsen.nl/api/competitions/' + comp.id + '/settings/distancecombinations/' + distance.id);
-                        const combinations = distanceDetailRes.data;
-
-                        combinations.forEach(comb => {
-                          if (comb.clubCodeFilter === '') {
-                            counter++;
-                          }
-                        });
-                      } catch (err) {
-                        console.error('Failed to fetch distance combination detail for competition ' + comp.id + ':', err.message);
+                      for (const competitor of competitors) {
+                        if (
+                          competitor.competitors &&
+                          competitor.competitors.competitor &&
+                          competitor.competitors.competitor.fullName === filterName
+                        ) {
+                          const gameUrl = `https://inschrijven.schaatsen.nl/#/wedstrijd/${comp.id}/informatie`;
+                          matchingGames.push({
+                            date: new Date(game.starts).toISOString().split('T')[0],
+                            time: new Date(game.starts).toISOString().split('T')[1].slice(0,5),
+                            event: game.name,
+                            city: game.venue?.address?.city || '',
+                            url: gameUrl
+                          });
+                          break;
+                        }
                       }
+                    } catch (err) {
+                      console.error('Failed to fetch competitors for competition ' + comp.id + ':', err.message);
                     }
-                  }
-
-                  if (counter === 0) {
-                    matchingCompetitions.push(comp);
                   }
 
                   await new Promise(r => setTimeout(r, 200)); // small delay
                 } catch (err) {
-                  console.error('Failed to fetch distance combinations for competition ' + comp.id + ':', err.message);
+                  console.error('Failed to fetch competition detail for ' + comp.id + ':', err.message);
                 }
               }
 
               fs.mkdirSync('./data', { recursive: true });
-              fs.writeFileSync('./data/competitions.json', JSON.stringify(matchingCompetitions, null, 2));
-              console.log('Matching competitions saved to data/competitions.json');
+              fs.writeFileSync('./data/competitions.json', JSON.stringify(matchingGames, null, 2));
+              console.log('Matching games saved to data/competitions.json');
             } catch (err) {
               console.error('Error fetching competitions list:', err.message);
               process.exit(1);
