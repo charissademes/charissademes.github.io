@@ -46,11 +46,10 @@ jobs:
                   console.log('Competition ID:', comp.id);
                   console.log('Competitors response:', JSON.stringify(competitors, null, 2));
 
-                  if (Array.isArray(competitors) && competitors.some(c => c.id === 10236341)) {
+                  if (Array.isArray(competitors) && competitors.some(c => c.licenseKey === '10236341')) {
                     matchingCompetitions.push(comp);
                   }
 
-                  // Optional: small delay to avoid hammering the API
                   await new Promise(r => setTimeout(r, 200));
                 } catch (err) {
                   console.error('Failed to fetch competitors for competition ' + comp.id + ':', err.message);
