@@ -40,7 +40,7 @@ jobs:
 
               for (const comp of competitions) {
                 try {
-                  const competitorsRes = await axios.get(\`https://inschrijven.schaatsen.nl/api/competitions/${comp.id}/competitors\`);
+                  const competitorsRes = await axios.get('https://inschrijven.schaatsen.nl/api/competitions/' + comp.id + '/competitors');
                   const competitors = competitorsRes.data;
 
                   if (competitors.some(c => c.id === 10236341)) {
@@ -50,7 +50,7 @@ jobs:
                   // Optional: small delay to avoid hammering the API
                   await new Promise(r => setTimeout(r, 200));
                 } catch (err) {
-                  console.error(\`Failed to fetch competitors for competition ${comp.id}:\`, err.message);
+                  console.error('Failed to fetch competitors for competition ' + comp.id + ':', err.message);
                 }
               }
 
