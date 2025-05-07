@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Charissa de Mes - Speedskater</title>
+    <link href="https://fonts.googleapis.com/css2?family=Gabarito&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: 'Gabarito', Arial, sans-serif;
+            background: url('/media/charissa_cartoon.png') no-repeat center center fixed;
+            background-size: cover;
+            background-color: rgba(255, 255, 255, 0.6);
+            background-blend-mode: lighten;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            min-height: 100vh;
+        }
+        .wrapper {
+            display: flex;
+            gap: 20px;
+            max-width: 1700px;
+            padding: 20px;
+            align-items: flex-start;
+        }
+        .left-section {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 100%;
+    max-width: 800px;
+    box-sizing: border-box;
+}
+        .container {
+            background-color: #001e60dd;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            text-align: center;
+        }
+        .charts-container {
+    width: 100%;
+    max-width: 800px;
+    background-color: #ffffffdd;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    box-sizing: border-box;
+}
+        img {
+            width: 200px;
+            height: auto;
+            border-radius: 20px;
+            margin-bottom: 20px;
+        }
+        h1, h2 {
+            margin-bottom: 10px;
+        }
+        #output {
+            text-align: left;
+            background-color: #ffffff;
+            padding: 10px;
+            border-radius: 10px;
+            overflow-x: auto;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        th, td {
+            padding: 8px;
+            border: 1px solid #ccc;
+            text-align: left;
+        }
+        th {
+            background-color: #aaaaaa;
+        }
+        .grey-text {
+            color: #ffffff;
+        }        
+        @media (max-width: 1170px) {
+            .wrapper {
+                flex-direction: column;
+                align-items: center;
+                width: 100%;
+            }
+            .left-section, .charts-container {
+                width: 100%;
+                max-width: 800px;
+            }
+        }
+    .charts-container canvas {
+        width: 100% !important;
+        height: auto !important;
+    }
+    .small-font {
+        font-size: 12px;
+        color: #ffffff;
+        text-align: left;
+    }
+    a {
+        color: #ffffff;
+        text-decoration: none;
+    }
+    a:hover {
+        text-decoration: underline;
+    }    
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <div class="left-section">
+            <div class="container">
+                <div class="grey-text">
+                    <img src="/media/charissa.png" alt="Charissa de Mes">
+                    <h1>Charissa de Mes</h1>
+                    <p><strong>Leeftijd:</strong> 16 jaar</p>
+                    <p><strong>Categorie:</strong> Dames Junioren B2</p>
+                    <p>Charissa is een gepassioneerde schaatsster met een sterke motivatie en tomeloze gedrevenheid. Jaar na jaar weet zij haar persoonlijke tijden te verbeteren, dankzij haar enorme doorzettingsvermogen en vastberadenheid. Dit seizoen werkt Charissa hard om haar grote doel te bereiken: deelname aan het NK schaatsen voor junioren. Met haar toewijding en groeiende prestaties is ze goed op weg om die droom waar te maken.</p>
+                    <br>
+                    <img src="/media/instagram.png" style="filter: invert(1); height: 48px; width: auto;">&nbsp;&nbsp;&nbsp;&nbsp;<img src="/media/tiktok.svg" style="filter: invert(1); height: 46px; width: 42px;">
+                    <hr size="-1" style="color: #ffffff;">
+                    <h2>Persoonlijke records</h2>
+                </div>
+                <div id="output">Ophalen persoonlijke records...</div>
+                <br>
+                <text class="small-font">Bron: <a href="https://speedskatingresults.com/index.php?p=17&s=92774" target="_blank">speedskatingresults.com</a></text>
+            </div>
+
+            <div class="container">
+                <h2 class="grey-text">Sponsors</h2>
+                <br>
+                <img src="/media/sponsor_example1.png" style="border-radius: 0px; height: 100px; width: auto;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="/media/sponsor_example2.png" style="border-radius: 0px; height: 100px; width: auto;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="/media/sponsor_example3.png" style="border-radius: 0px; height: 100px; width: auto;">
+            </div>
+        </div>
+
+        
+
+        <div class="charts-container">
+            <h2>500m</h2>
+            <hr size="-1">
+            <canvas id="resultsChart500"></canvas>
+            <br>
+            <h2>1000m</h2>
+            <hr size="-1">
+            <canvas id="resultsChart1000"></canvas>
+            <br>
+            <h2>1500m</h2>
+            <hr size="-1">
+            <canvas id="resultsChart1500"></canvas>
+            <br>
+            <h2>3000m</h2>
+            <hr size="-1">
+            <canvas id="resultsChart3000"></canvas>
+        </div>
+    </div>
+
+    <script>
+        fetch('https://speedskatingresults.com/api/json/personal_records.php?skater=92774')  
+            .then(response => response.json())
+            .then(data => {
+                const records = data.records;
+                let table = '<table><tr><th>Afstand (m)</th><th>Tijd</th><th>Datum</th><th>Locatie</th></tr>';
+                for (const key in records) {
+                    const record = records[key];
+                    table += `<tr>
+                        <td>${record.distance}</td>
+                        <td>${record.time}</td>
+                        <td>${record.date}</td>
+                        <td>${record.location}</td>
+                    </tr>`;
+                }
+                table += '</table>';
+                document.getElementById('output').innerHTML = table;
+            })
+            .catch(error => {
+                console.error('Error fetching data:', error);
+                document.getElementById('output').innerText = 'Failed to fetch data';
+            });
+
+            function parseTimeToSeconds(timeStr) {
+        timeStr = timeStr.replace(',', '.');
+        let totalSeconds = 0;
+        const parts = timeStr.split('.');
+
+        if (parts.length === 3) {
+            // min.sec.ms → 1.27.15 → 1m,27s,15ms
+            const min = parseInt(parts[0]);
+            const sec = parseInt(parts[1]);
+            const ms = parseInt(parts[2]);
+            totalSeconds = min * 60 + sec + ms / 100;
+        } else if (parts.length === 2) {
+            // sec.ms → 45.10 → 45s,10ms
+            const sec = parseInt(parts[0]);
+            const ms = parseInt(parts[1]);
+            totalSeconds = sec + ms / 100;
+        } else {
+            totalSeconds = parseFloat(timeStr);
+        }
+        return parseFloat(totalSeconds.toFixed(2));
+    }
+
+    function formatSecondsToTime(totalSeconds) {
+        const min = Math.floor(totalSeconds / 60);
+        const sec = Math.floor(totalSeconds % 60);
+        const ms = Math.round((totalSeconds - Math.floor(totalSeconds)) * 100);
+        if (totalSeconds >= 60) {
+            return `${min}:${sec.toString().padStart(2, '0')},${ms.toString().padStart(2, '0')}`;
+        } else {
+            return `${sec},${ms.toString().padStart(2, '0')}`;
+        }
+    }
+
+    async function fetchAndRenderChart(distance, chartId, color) {
+        const response = await fetch(`https://speedskatingresults.com/api/json/skater_results.php?skater=92774&distance=${distance}`);
+        const data = await response.json();
+
+        if (!data.results || data.results.length === 0) return;
+
+        data.results.sort((a, b) => new Date(a.date) - new Date(b.date));
+        const labels = [], times = [], locations = [];
+        data.results.forEach(result => {
+            labels.push(result.date);
+            locations.push(result.location);
+            const totalSeconds = parseTimeToSeconds(result.time);
+            times.push(totalSeconds);
+        });
+
+        const ctx = document.getElementById(chartId).getContext('2d');
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: 'Time (s)',
+                    data: times,
+                    borderColor: color,
+                    fill: false,
+                    tension: 0.1
+                }]
+            },
+            options: {
+                plugins: {
+                    tooltip: {
+                        callbacks: {
+                            label: context => {
+                                const totalSec = context.raw;
+                                const formattedTime = formatSecondsToTime(totalSec);
+                                return `Time: ${formattedTime}`;
+                            },
+                            afterLabel: context => `Location: ${locations[context.dataIndex]}`
+                        }
+                    },
+                    legend: { labels: { font: { family: 'Gabarito' } } }
+                },
+                scales: {
+                    x: { ticks: { autoSkip: true, maxTicksLimit: 10, font: { family: 'Gabarito' } }},
+                    y: { beginAtZero: false, title: { display: true, text: 'Seconds', font: { family: 'Gabarito' } } }
+                }
+            }
+        });
+    }
+
+    fetchAndRenderChart(500, 'resultsChart500', '#b5179e');
+    fetchAndRenderChart(1000, 'resultsChart1000', '#001e60');
+    fetchAndRenderChart(1500, 'resultsChart1500', '#7209b7');
+    fetchAndRenderChart(3000, 'resultsChart3000', '#560bad');
+    </script>
+</body>
+</html>
