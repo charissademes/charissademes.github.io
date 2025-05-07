@@ -1,4 +1,4 @@
-name: fetch-competitions-for-charissa-de-mes
+name: Fetch Competitions
 
 on:
   schedule:
@@ -41,6 +41,10 @@ jobs:
               const competitions = res.data;
 
               for (const comp of competitions) {
+                if (comp.discipline !== 'SpeedSkating.LongTrack') {
+                  continue; // skip if discipline doesn't match
+                }
+
                 try {
                   const competitionDetailRes = await axios.get('https://inschrijven.schaatsen.nl/api/competitions/' + comp.id);
                   const competition = competitionDetailRes.data;
@@ -74,10 +78,6 @@ jobs:
 
                     if (!found) {
                       console.log(`No match for competition: ${competition.name}`);
-                    }
-                    
-                    if (found) {
-                      console.log(`Match for competition: ${competition.name}`);
                     }
 
                   } catch (err) {
