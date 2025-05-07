@@ -49,28 +49,36 @@ jobs:
                     const competitorsRes = await axios.get('https://inschrijven.schaatsen.nl/api/competitions/' + comp.id + '/competitors');
                     const competitors = competitorsRes.data;
 
+                    let found = false;
+
                     for (const competitor of competitors) {
-                      if (
-                        competitor.competitors &&
-                        competitor.competitors.competitor &&
-                        competitor.competitors.competitor.fullName === filterName
-                      ) {
-                        const competitionUrl = `https://inschrijven.schaatsen.nl/#/wedstrijd/${comp.id}/informatie`;
-                        matchingCompetitions.push({
-                          date: new Date(competition.starts).toISOString().split('T')[0],
-                          time: new Date(competition.starts).toISOString().split('T')[1].slice(0,5),
-                          event: competition.name,
-                          city: competition.venue?.address?.city || '',
-                          url: competitionUrl
-                        });
-                        break;
+                      const fullName = competitor?.competitors?.competitor?.fullName;
+                      if (fullName) {
+                        console.log(`Checking competitor: ${fullName}`);
+                        if (fullName.toLowerCase() === filterName.toLowerCase()) {
+                          const competitionUrl = `https://inschrijven.schaatsen.nl/#/wedstrijd/${comp.id}/informatie`;
+                          matchingCompetitions.push({
+                            date: new Date(competition.starts).toISOString().split('T')[0],
+                            time: new Date(competition.starts).toISOString().split('T')[1].slice(0,5),
+                            event: competition.name,
+                            city: competition.venue?.address?.city || '',
+                            url: competitionUrl
+                          });
+                          found = true;
+                          break;
+                        }
                       }
                     }
+
+                    if (!found) {
+                      console.log(`No match found for competition: ${competition.name}`);
+                    }
+
                   } catch (err) {
                     console.error('Failed to fetch competitors for competition ' + comp.id + ':', err.message);
                   }
 
-                  await new Promise(r => setTimeout(r, 200)); // small delay
+                  await new Promise(r => setTimeout(r, 200));
                 } catch (err) {
                   console.error('Failed to fetch competition detail for ' + comp.id + ':', err.message);
                 }
