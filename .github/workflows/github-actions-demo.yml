@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write  # Allow write access for committing changes
+  contents: write
 
 jobs:
   fetch-competitions:
@@ -40,15 +40,17 @@ jobs:
 
               for (const comp of competitions) {
                 try {
-                  const detailRes = await axios.get(`https://inschrijven.schaatsen.nl/api/competitions/${comp.id}`);
-                  const detail = detailRes.data;
-                  if (detail.competitors && detail.competitors.some(c => c.id === 10236341)) {
-                    matchingCompetitions.push(detail);
+                  const competitorsRes = await axios.get(\`https://inschrijven.schaatsen.nl/api/competitions/${comp.id}/competitors\`);
+                  const competitors = competitorsRes.data;
+
+                  if (competitors.some(c => c.id === 10236341)) {
+                    matchingCompetitions.push(comp);
                   }
+
                   // Optional: small delay to avoid hammering the API
                   await new Promise(r => setTimeout(r, 200));
                 } catch (err) {
-                  console.error(`Failed to fetch details for competition ${comp.id}:`, err.message);
+                  console.error(\`Failed to fetch competitors for competition ${comp.id}:\`, err.message);
                 }
               }
 
