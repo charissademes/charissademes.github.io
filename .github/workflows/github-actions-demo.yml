@@ -34,7 +34,7 @@ jobs:
 
           async function fetchCompetitions() {
             const filterName = 'Charissa de Mes';
-            const matchingGames = [];
+            const matchingCompetitions = [];
 
             try {
               const res = await axios.get('https://inschrijven.schaatsen.nl/api/competitions');
@@ -43,33 +43,31 @@ jobs:
               for (const comp of competitions) {
                 try {
                   const competitionDetailRes = await axios.get('https://inschrijven.schaatsen.nl/api/competitions/' + comp.id);
-                  const games = competitionDetailRes.data;
+                  const competition = competitionDetailRes.data;
 
-                  for (const game of games) {
-                    try {
-                      const competitorsRes = await axios.get('https://inschrijven.schaatsen.nl/api/competitions/' + comp.id + '/competitors');
-                      const competitors = competitorsRes.data;
+                  try {
+                    const competitorsRes = await axios.get('https://inschrijven.schaatsen.nl/api/competitions/' + comp.id + '/competitors');
+                    const competitors = competitorsRes.data;
 
-                      for (const competitor of competitors) {
-                        if (
-                          competitor.competitors &&
-                          competitor.competitors.competitor &&
-                          competitor.competitors.competitor.fullName === filterName
-                        ) {
-                          const gameUrl = `https://inschrijven.schaatsen.nl/#/wedstrijd/${comp.id}/informatie`;
-                          matchingGames.push({
-                            date: new Date(game.starts).toISOString().split('T')[0],
-                            time: new Date(game.starts).toISOString().split('T')[1].slice(0,5),
-                            event: game.name,
-                            city: game.venue?.address?.city || '',
-                            url: gameUrl
-                          });
-                          break;
-                        }
+                    for (const competitor of competitors) {
+                      if (
+                        competitor.competitors &&
+                        competitor.competitors.competitor &&
+                        competitor.competitors.competitor.fullName === filterName
+                      ) {
+                        const competitionUrl = `https://inschrijven.schaatsen.nl/#/wedstrijd/${comp.id}/informatie`;
+                        matchingCompetitions.push({
+                          date: new Date(competition.starts).toISOString().split('T')[0],
+                          time: new Date(competition.starts).toISOString().split('T')[1].slice(0,5),
+                          event: competition.name,
+                          city: competition.venue?.address?.city || '',
+                          url: competitionUrl
+                        });
+                        break;
                       }
-                    } catch (err) {
-                      console.error('Failed to fetch competitors for competition ' + comp.id + ':', err.message);
                     }
+                  } catch (err) {
+                    console.error('Failed to fetch competitors for competition ' + comp.id + ':', err.message);
                   }
 
                   await new Promise(r => setTimeout(r, 200)); // small delay
@@ -79,8 +77,8 @@ jobs:
               }
 
               fs.mkdirSync('./data', { recursive: true });
-              fs.writeFileSync('./data/competitions.json', JSON.stringify(matchingGames, null, 2));
-              console.log('Matching games saved to data/competitions.json');
+              fs.writeFileSync('./data/competitions.json', JSON.stringify(matchingCompetitions, null, 2));
+              console.log('Matching competitions saved to data/competitions.json');
             } catch (err) {
               console.error('Error fetching competitions list:', err.message);
               process.exit(1);
