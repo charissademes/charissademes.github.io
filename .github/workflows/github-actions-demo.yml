@@ -3,7 +3,10 @@ name: Fetch Competitions
 on:
   schedule:
     - cron: '0 2 * * *'  # Runs daily at 2 AM UTC
-  workflow_dispatch:      # Allows manual trigger
+  workflow_dispatch:
+
+permissions:
+  contents: write  # Allow write access for committing changes
 
 jobs:
   fetch-competitions:
@@ -12,6 +15,8 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Set up Node.js
         uses: actions/setup-node@v3
@@ -27,19 +32,36 @@ jobs:
           const fs = require('fs');
           const axios = require('axios');
 
-          axios.get('https://inschrijven.schaatsen.nl/api/competitions')
-            .then(response => {
-              const competitions = response.data.filter(c => 
-                c.competitors && c.competitors.some(comp => comp.id === 10236341)
-              );
+          async function fetchCompetitions() {
+            try {
+              const res = await axios.get('https://inschrijven.schaatsen.nl/api/competitions');
+              const competitions = res.data;
+              const matchingCompetitions = [];
+
+              for (const comp of competitions) {
+                try {
+                  const detailRes = await axios.get(`https://inschrijven.schaatsen.nl/api/competitions/${comp.id}`);
+                  const detail = detailRes.data;
+                  if (detail.competitors && detail.competitors.some(c => c.id === 10236341)) {
+                    matchingCompetitions.push(detail);
+                  }
+                  // Optional: small delay to avoid hammering the API
+                  await new Promise(r => setTimeout(r, 200));
+                } catch (err) {
+                  console.error(`Failed to fetch details for competition ${comp.id}:`, err.message);
+                }
+              }
+
               fs.mkdirSync('./data', { recursive: true });
-              fs.writeFileSync('./data/competitions.json', JSON.stringify(competitions, null, 2));
-              console.log('Competitions saved to data/competitions.json');
-            })
-            .catch(error => {
-              console.error('Error fetching competitions:', error);
+              fs.writeFileSync('./data/competitions.json', JSON.stringify(matchingCompetitions, null, 2));
+              console.log('Matching competitions saved to data/competitions.json');
+            } catch (err) {
+              console.error('Error fetching competitions list:', err.message);
               process.exit(1);
-            });
+            }
+          }
+
+          fetchCompetitions();
           EOF
 
       - name: Commit and push changes
@@ -47,5 +69,5 @@ jobs:
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
           git add data/competitions.json
-          git commit -m "Update competitions.json"
-          git push
+          git commit -m "Update competitions.json" || echo "No changes to commit"
+          git push origin HEAD
