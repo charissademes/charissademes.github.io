@@ -1,17 +1,17 @@
 [
   {
-    "name": "BVA 4 kamp 500 1500 1000 3000",
-    "date": "2024-12-07",
-    "time": "17:45",
-    "city": "Alkmaar",
-    "url": "https://inschrijven.schaatsen.nl/#/wedstrijd/b472a6fa-3003-4605-99e0-58398cba19e2/informatie"
-  },
-  {
     "name": "Clubwedstrijd AIJC 3",
     "date": "2024-12-14",
     "time": "17:45",
     "city": "Alkmaar",
     "url": "https://inschrijven.schaatsen.nl/#/wedstrijd/6026ce06-0937-4844-a166-57177e3af92b/informatie"
+  },
+  {
+    "name": "BVA 4 kamp 500 1500 1000 3000",
+    "date": "2024-12-07",
+    "time": "17:45",
+    "city": "Alkmaar",
+    "url": "https://inschrijven.schaatsen.nl/#/wedstrijd/b472a6fa-3003-4605-99e0-58398cba19e2/informatie"
   },
   {
     "name": "Fortysix Bokaal",
@@ -35,18 +35,18 @@
     "url": "https://inschrijven.schaatsen.nl/#/wedstrijd/5957ea31-2567-4a5e-ae7d-88686c830969/informatie"
   },
   {
-    "name": "Sprint League 2",
-    "date": "2025-01-04",
-    "time": "17:00",
-    "city": "Alkmaar",
-    "url": "https://inschrijven.schaatsen.nl/#/wedstrijd/fee6503c-9cfb-42a6-82f5-f665279f312b/informatie"
-  },
-  {
     "name": "test teamsprint",
     "date": "2024-11-13",
     "time": "17:00",
     "city": "Alkmaar",
     "url": "https://inschrijven.schaatsen.nl/#/wedstrijd/491e6af7-628f-4cd9-9c9e-cd434f3b3c07/informatie"
+  },
+  {
+    "name": "Sprint League 2",
+    "date": "2025-01-04",
+    "time": "17:00",
+    "city": "Alkmaar",
+    "url": "https://inschrijven.schaatsen.nl/#/wedstrijd/fee6503c-9cfb-42a6-82f5-f665279f312b/informatie"
   },
   {
     "name": "Clubwedstrijd CHZNKHH",
