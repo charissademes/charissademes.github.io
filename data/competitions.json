@@ -21,18 +21,18 @@
     "url": "https://inschrijven.schaatsen.nl/#/wedstrijd/f55f716b-4660-4d54-8f70-2a8903a51ed6/informatie"
   },
   {
-    "name": "Categorie Pure Sprint wedstrijd",
-    "date": "2025-02-16",
-    "time": "17:00",
-    "city": "Alkmaar",
-    "url": "https://inschrijven.schaatsen.nl/#/wedstrijd/29769abd-2cba-4026-a3f9-7e52604278d0/informatie"
-  },
-  {
     "name": "NK Junioren A en B Sprint-Lange afstanden",
     "date": "2025-03-01",
     "time": "14:00",
     "city": "Alkmaar",
     "url": "https://inschrijven.schaatsen.nl/#/wedstrijd/5957ea31-2567-4a5e-ae7d-88686c830969/informatie"
+  },
+  {
+    "name": "Categorie Pure Sprint wedstrijd",
+    "date": "2025-02-16",
+    "time": "17:00",
+    "city": "Alkmaar",
+    "url": "https://inschrijven.schaatsen.nl/#/wedstrijd/29769abd-2cba-4026-a3f9-7e52604278d0/informatie"
   },
   {
     "name": "Sprint League 2",
@@ -105,6 +105,13 @@
     "url": "https://inschrijven.schaatsen.nl/#/wedstrijd/efeaf519-ae35-47cd-bf44-a6b9fd30ab6b/informatie"
   },
   {
+    "name": "Recordwedstrijd-8 Thialf open inschrijving, 5 januari 2025",
+    "date": "2025-01-05",
+    "time": "16:00",
+    "city": "Heerenveen",
+    "url": "https://inschrijven.schaatsen.nl/#/wedstrijd/bafc50f3-94c0-4469-87c5-95281e2d5750/informatie"
+  },
+  {
     "name": "Recordwedstrijd-9 Thialf open inschrijving, 9 maart 2025",
     "date": "2025-03-09",
     "time": "16:00",
@@ -112,11 +119,18 @@
     "url": "https://inschrijven.schaatsen.nl/#/wedstrijd/aa7fcc78-91eb-4787-8eb9-990462d28e37/informatie"
   },
   {
-    "name": "Recordwedstrijd-8 Thialf open inschrijving, 5 januari 2025",
-    "date": "2025-01-05",
-    "time": "16:00",
+    "name": "Trainingswedstrijd + Gewestelijke wedstrijd Pupillen B en ouder",
+    "date": "2025-03-03",
+    "time": "17:30",
     "city": "Heerenveen",
-    "url": "https://inschrijven.schaatsen.nl/#/wedstrijd/bafc50f3-94c0-4469-87c5-95281e2d5750/informatie"
+    "url": "https://inschrijven.schaatsen.nl/#/wedstrijd/8e5da444-c057-4889-81e6-47791567230e/informatie"
+  },
+  {
+    "name": "KONINKLIJKE THIALF- HCH JEUGDWEDSTRIJD",
+    "date": "2024-12-31",
+    "time": "10:15",
+    "city": "Heerenveen",
+    "url": "https://inschrijven.schaatsen.nl/#/wedstrijd/5ccbe0df-eadc-45d5-93cd-4b73e5a07b81/informatie"
   },
   {
     "name": "Schaatscircuit.nl - 20250126",
@@ -131,20 +145,6 @@
     "time": "17:30",
     "city": "Heerenveen",
     "url": "https://inschrijven.schaatsen.nl/#/wedstrijd/0b5195e3-42a7-4524-8982-63bd54bcb3c6/informatie"
-  },
-  {
-    "name": "KONINKLIJKE THIALF- HCH JEUGDWEDSTRIJD",
-    "date": "2024-12-31",
-    "time": "10:15",
-    "city": "Heerenveen",
-    "url": "https://inschrijven.schaatsen.nl/#/wedstrijd/5ccbe0df-eadc-45d5-93cd-4b73e5a07b81/informatie"
-  },
-  {
-    "name": "Trainingswedstrijd + Gewestelijke wedstrijd Pupillen B en ouder",
-    "date": "2025-03-03",
-    "time": "17:30",
-    "city": "Heerenveen",
-    "url": "https://inschrijven.schaatsen.nl/#/wedstrijd/8e5da444-c057-4889-81e6-47791567230e/informatie"
   },
   {
     "name": "Schaatscircuit.nl - 20250215",
