@@ -1,12 +1,5 @@
 [
   {
-    "name": "Clubwedstrijd AIJC 3",
-    "date": "2024-12-14",
-    "time": "17:45",
-    "city": "Alkmaar",
-    "url": "https://inschrijven.schaatsen.nl/#/wedstrijd/6026ce06-0937-4844-a166-57177e3af92b/informatie"
-  },
-  {
     "name": "BVA 4 kamp 500 1500 1000 3000",
     "date": "2024-12-07",
     "time": "17:45",
@@ -14,18 +7,18 @@
     "url": "https://inschrijven.schaatsen.nl/#/wedstrijd/b472a6fa-3003-4605-99e0-58398cba19e2/informatie"
   },
   {
+    "name": "Clubwedstrijd AIJC 3",
+    "date": "2024-12-14",
+    "time": "17:45",
+    "city": "Alkmaar",
+    "url": "https://inschrijven.schaatsen.nl/#/wedstrijd/6026ce06-0937-4844-a166-57177e3af92b/informatie"
+  },
+  {
     "name": "Fortysix Bokaal",
     "date": "2025-03-22",
     "time": "16:30",
     "city": "Alkmaar",
     "url": "https://inschrijven.schaatsen.nl/#/wedstrijd/f55f716b-4660-4d54-8f70-2a8903a51ed6/informatie"
-  },
-  {
-    "name": "Categorie Pure Sprint wedstrijd",
-    "date": "2025-02-16",
-    "time": "17:00",
-    "city": "Alkmaar",
-    "url": "https://inschrijven.schaatsen.nl/#/wedstrijd/29769abd-2cba-4026-a3f9-7e52604278d0/informatie"
   },
   {
     "name": "NK Junioren A en B Sprint-Lange afstanden",
@@ -42,18 +35,25 @@
     "url": "https://inschrijven.schaatsen.nl/#/wedstrijd/bc5f6823-76bd-4f26-a186-dc0a3226e480/informatie"
   },
   {
-    "name": "Sprint League 2",
-    "date": "2025-01-04",
-    "time": "17:00",
-    "city": "Alkmaar",
-    "url": "https://inschrijven.schaatsen.nl/#/wedstrijd/fee6503c-9cfb-42a6-82f5-f665279f312b/informatie"
-  },
-  {
     "name": "Clubwedstrijd CHZNKHH",
     "date": "2025-02-23",
     "time": "17:00",
     "city": "Alkmaar",
     "url": "https://inschrijven.schaatsen.nl/#/wedstrijd/74003b19-1d38-4098-a721-e2440686ecdc/informatie"
+  },
+  {
+    "name": "Categorie Pure Sprint wedstrijd",
+    "date": "2025-02-16",
+    "time": "17:00",
+    "city": "Alkmaar",
+    "url": "https://inschrijven.schaatsen.nl/#/wedstrijd/29769abd-2cba-4026-a3f9-7e52604278d0/informatie"
+  },
+  {
+    "name": "Sprint League 2",
+    "date": "2025-01-04",
+    "time": "17:00",
+    "city": "Alkmaar",
+    "url": "https://inschrijven.schaatsen.nl/#/wedstrijd/fee6503c-9cfb-42a6-82f5-f665279f312b/informatie"
   },
   {
     "name": "Baankaarthouders alle klassen 5 + gasten",
@@ -84,18 +84,18 @@
     "url": "https://inschrijven.schaatsen.nl/#/wedstrijd/437c2d9f-1b8e-453b-a04a-f6123d14db36/informatie"
   },
   {
-    "name": "KONINKLIJKE THIALF- HCH JEUGDWEDSTRIJD",
-    "date": "2024-12-31",
-    "time": "10:15",
-    "city": "Heerenveen",
-    "url": "https://inschrijven.schaatsen.nl/#/wedstrijd/5ccbe0df-eadc-45d5-93cd-4b73e5a07b81/informatie"
-  },
-  {
     "name": "Trainingswedstrijd + Gewestelijke wedstrijd Pupillen B en ouder",
     "date": "2025-03-03",
     "time": "17:30",
     "city": "Heerenveen",
     "url": "https://inschrijven.schaatsen.nl/#/wedstrijd/8e5da444-c057-4889-81e6-47791567230e/informatie"
+  },
+  {
+    "name": "KONINKLIJKE THIALF- HCH JEUGDWEDSTRIJD",
+    "date": "2024-12-31",
+    "time": "10:15",
+    "city": "Heerenveen",
+    "url": "https://inschrijven.schaatsen.nl/#/wedstrijd/5ccbe0df-eadc-45d5-93cd-4b73e5a07b81/informatie"
   },
   {
     "name": "Schaatscircuit.nl - 20250126",
@@ -110,13 +110,6 @@
     "time": "18:00",
     "city": "Heerenveen",
     "url": "https://inschrijven.schaatsen.nl/#/wedstrijd/efeaf519-ae35-47cd-bf44-a6b9fd30ab6b/informatie"
-  },
-  {
-    "name": "Recordwedstrijd-6 Thialf open inschrijving, 24 november 2024",
-    "date": "2024-11-24",
-    "time": "16:00",
-    "city": "Heerenveen",
-    "url": "https://inschrijven.schaatsen.nl/#/wedstrijd/023efc3b-67f4-4346-a648-c0eb53518629/informatie"
   },
   {
     "name": "Recordwedstrijd-8 Thialf open inschrijving, 5 januari 2025",
