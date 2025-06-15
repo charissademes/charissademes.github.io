@@ -1,12 +1,5 @@
 [
   {
-    "name": "Clubwedstrijd AIJC 3",
-    "date": "2024-12-14",
-    "time": "17:45",
-    "city": "Alkmaar",
-    "url": "https://inschrijven.schaatsen.nl/#/wedstrijd/6026ce06-0937-4844-a166-57177e3af92b/informatie"
-  },
-  {
     "name": "Fortysix Bokaal",
     "date": "2025-03-22",
     "time": "16:30",
@@ -77,6 +70,13 @@
     "url": "https://inschrijven.schaatsen.nl/#/wedstrijd/437c2d9f-1b8e-453b-a04a-f6123d14db36/informatie"
   },
   {
+    "name": "Schaatscircuit.nl - 20250126",
+    "date": "2025-01-26",
+    "time": "16:00",
+    "city": "Heerenveen",
+    "url": "https://inschrijven.schaatsen.nl/#/wedstrijd/d847ccf2-ddf2-4a79-b2e6-6058bcd12a87/informatie"
+  },
+  {
     "name": "Trainingswedstrijd + Gewestelijke wedstrijd Pupillen B en ouder",
     "date": "2025-03-03",
     "time": "17:30",
@@ -91,13 +91,6 @@
     "url": "https://inschrijven.schaatsen.nl/#/wedstrijd/5ccbe0df-eadc-45d5-93cd-4b73e5a07b81/informatie"
   },
   {
-    "name": "Schaatscircuit.nl - 20250126",
-    "date": "2025-01-26",
-    "time": "16:00",
-    "city": "Heerenveen",
-    "url": "https://inschrijven.schaatsen.nl/#/wedstrijd/d847ccf2-ddf2-4a79-b2e6-6058bcd12a87/informatie"
-  },
-  {
     "name": "Schaatscircuit.nl - 20250222",
     "date": "2025-02-22",
     "time": "18:00",
@@ -105,18 +98,18 @@
     "url": "https://inschrijven.schaatsen.nl/#/wedstrijd/efeaf519-ae35-47cd-bf44-a6b9fd30ab6b/informatie"
   },
   {
-    "name": "Recordwedstrijd-8 Thialf open inschrijving, 5 januari 2025",
-    "date": "2025-01-05",
-    "time": "16:00",
-    "city": "Heerenveen",
-    "url": "https://inschrijven.schaatsen.nl/#/wedstrijd/bafc50f3-94c0-4469-87c5-95281e2d5750/informatie"
-  },
-  {
     "name": "Recordwedstrijd-9 Thialf open inschrijving, 9 maart 2025",
     "date": "2025-03-09",
     "time": "16:00",
     "city": "Heerenveen",
     "url": "https://inschrijven.schaatsen.nl/#/wedstrijd/aa7fcc78-91eb-4787-8eb9-990462d28e37/informatie"
+  },
+  {
+    "name": "Recordwedstrijd-8 Thialf open inschrijving, 5 januari 2025",
+    "date": "2025-01-05",
+    "time": "16:00",
+    "city": "Heerenveen",
+    "url": "https://inschrijven.schaatsen.nl/#/wedstrijd/bafc50f3-94c0-4469-87c5-95281e2d5750/informatie"
   },
   {
     "name": "Schaatscircuit.nl - 20250215",
