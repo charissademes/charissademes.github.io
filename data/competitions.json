@@ -1,12 +1,5 @@
 [
   {
-    "name": "Categorie Pure Sprint wedstrijd",
-    "date": "2025-02-16",
-    "time": "17:00",
-    "city": "Alkmaar",
-    "url": "https://inschrijven.schaatsen.nl/#/wedstrijd/29769abd-2cba-4026-a3f9-7e52604278d0/informatie"
-  },
-  {
     "name": "Fortysix Bokaal",
     "date": "2025-03-22",
     "time": "16:30",
@@ -33,6 +26,13 @@
     "time": "17:00",
     "city": "Alkmaar",
     "url": "https://inschrijven.schaatsen.nl/#/wedstrijd/74003b19-1d38-4098-a721-e2440686ecdc/informatie"
+  },
+  {
+    "name": "Categorie Pure Sprint wedstrijd",
+    "date": "2025-02-16",
+    "time": "17:00",
+    "city": "Alkmaar",
+    "url": "https://inschrijven.schaatsen.nl/#/wedstrijd/29769abd-2cba-4026-a3f9-7e52604278d0/informatie"
   },
   {
     "name": "NK Junioren A en B Sprint-Lange afstanden",
