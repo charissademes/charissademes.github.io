@@ -1,19 +1,5 @@
 [
   {
-    "name": "Fortysix Bokaal",
-    "date": "2025-03-22",
-    "time": "16:30",
-    "city": "Alkmaar",
-    "url": "https://inschrijven.schaatsen.nl/#/wedstrijd/f55f716b-4660-4d54-8f70-2a8903a51ed6/informatie"
-  },
-  {
-    "name": "Categorie Pure Sprint wedstrijd",
-    "date": "2025-02-16",
-    "time": "17:00",
-    "city": "Alkmaar",
-    "url": "https://inschrijven.schaatsen.nl/#/wedstrijd/29769abd-2cba-4026-a3f9-7e52604278d0/informatie"
-  },
-  {
     "name": "Clubwedstrijd CHZNKHH",
     "date": "2025-02-23",
     "time": "17:00",
@@ -28,18 +14,25 @@
     "url": "https://inschrijven.schaatsen.nl/#/wedstrijd/5957ea31-2567-4a5e-ae7d-88686c830969/informatie"
   },
   {
+    "name": "Categorie Pure Sprint wedstrijd",
+    "date": "2025-02-16",
+    "time": "17:00",
+    "city": "Alkmaar",
+    "url": "https://inschrijven.schaatsen.nl/#/wedstrijd/29769abd-2cba-4026-a3f9-7e52604278d0/informatie"
+  },
+  {
+    "name": "Fortysix Bokaal",
+    "date": "2025-03-22",
+    "time": "16:30",
+    "city": "Alkmaar",
+    "url": "https://inschrijven.schaatsen.nl/#/wedstrijd/f55f716b-4660-4d54-8f70-2a8903a51ed6/informatie"
+  },
+  {
     "name": "Baankaarthouders alle klassen 5 + gasten",
     "date": "2025-03-01",
     "time": "17:00",
     "city": "Enschede",
     "url": "https://inschrijven.schaatsen.nl/#/wedstrijd/161aad3d-e8c4-41a7-bcbf-061e5c90111a/informatie"
-  },
-  {
-    "name": "Schaatscircuit.nl - 20250222",
-    "date": "2025-02-22",
-    "time": "18:00",
-    "city": "Heerenveen",
-    "url": "https://inschrijven.schaatsen.nl/#/wedstrijd/efeaf519-ae35-47cd-bf44-a6b9fd30ab6b/informatie"
   },
   {
     "name": "Trainingswedstrijd + Gewestelijke wedstrijd Pupillen B en ouder",
@@ -56,10 +49,10 @@
     "url": "https://inschrijven.schaatsen.nl/#/wedstrijd/aa7fcc78-91eb-4787-8eb9-990462d28e37/informatie"
   },
   {
-    "name": "Schaatscircuit.nl - 20250215",
-    "date": "2025-02-15",
-    "time": "19:00",
-    "city": "Leeuwarden",
-    "url": "https://inschrijven.schaatsen.nl/#/wedstrijd/5bdc6b6b-47ea-4307-9f10-0f653fc85c97/informatie"
+    "name": "Schaatscircuit.nl - 20250222",
+    "date": "2025-02-22",
+    "time": "18:00",
+    "city": "Heerenveen",
+    "url": "https://inschrijven.schaatsen.nl/#/wedstrijd/efeaf519-ae35-47cd-bf44-a6b9fd30ab6b/informatie"
   }
 ]
