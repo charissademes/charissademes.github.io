@@ -1,23 +1,16 @@
 [
   {
-    "name": "Fortysix Bokaal",
-    "date": "2025-03-22",
-    "time": "16:30",
-    "city": "Alkmaar",
-    "url": "https://inschrijven.schaatsen.nl/#/wedstrijd/f55f716b-4660-4d54-8f70-2a8903a51ed6/informatie"
-  },
-  {
-    "name": "Trainingswedstrijd + Gewestelijke wedstrijd Pupillen B en ouder",
-    "date": "2025-03-03",
-    "time": "17:30",
-    "city": "Heerenveen",
-    "url": "https://inschrijven.schaatsen.nl/#/wedstrijd/8e5da444-c057-4889-81e6-47791567230e/informatie"
-  },
-  {
     "name": "Recordwedstrijd-9 Thialf open inschrijving, 9 maart 2025",
     "date": "2025-03-09",
     "time": "16:00",
     "city": "Heerenveen",
     "url": "https://inschrijven.schaatsen.nl/#/wedstrijd/aa7fcc78-91eb-4787-8eb9-990462d28e37/informatie"
+  },
+  {
+    "name": "Fortysix Bokaal",
+    "date": "2025-03-22",
+    "time": "16:30",
+    "city": "Alkmaar",
+    "url": "https://inschrijven.schaatsen.nl/#/wedstrijd/f55f716b-4660-4d54-8f70-2a8903a51ed6/informatie"
   }
 ]
