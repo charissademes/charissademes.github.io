@@ -184,6 +184,8 @@
                         </tbody>
                     </table>
                 </div>
+                <br>
+                <text class="small-font">Bron: <a href="https://inschrijven.schaatsen.nl/#/wedstrijden" target="_blank">inschrijven.schaatsen.nl</a></text>
             </div>
 
             <div class="container">
@@ -255,13 +257,13 @@
                         tableBody.appendChild(row);
                     });
                 } else {
-                    tableBody.innerHTML = '<tr><td colspan="5">No upcoming competitions available.</td></tr>';
+                    tableBody.innerHTML = '<tr><td colspan="5">Geen aankomende wedstrijden beschikbaar.</td></tr>';
                 }
             })
             .catch(error => {
                 console.error('Error fetching data:', error);
                 const tableBody = document.querySelector('#competitions-table tbody');
-                tableBody.innerHTML = '<tr><td colspan="5">Failed to load competitions.</td></tr>';
+                tableBody.innerHTML = '<tr><td colspan="5">Kon wedstrijden niet laden.</td></tr>';
             });
 
         function parseTimeToSeconds(timeStr) {
@@ -316,7 +318,7 @@
                 data: {
                     labels: labels,
                     datasets: [{
-                        label: 'Time (s)',
+                        label: 'Tijd (sec.)',
                         data: times,
                         borderColor: color,
                         fill: false,
@@ -330,16 +332,16 @@
                                 label: context => {
                                     const totalSec = context.raw;
                                     const formattedTime = formatSecondsToTime(totalSec);
-                                    return `Time: ${formattedTime}`;
+                                    return `Tijd: ${formattedTime}`;
                                 },
-                                afterLabel: context => `Location: ${locations[context.dataIndex]}`
+                                afterLabel: context => `Locatie: ${locations[context.dataIndex]}`
                             }
                         },
                         legend: { labels: { font: { family: 'Gabarito' } } }
                     },
                     scales: {
                         x: { ticks: { autoSkip: true, maxTicksLimit: 10, font: { family: 'Gabarito' } }},
-                        y: { beginAtZero: false, title: { display: true, text: 'Seconds', font: { family: 'Gabarito' } } }
+                        y: { beginAtZero: false, title: { display: true, text: 'Seconden', font: { family: 'Gabarito' } } }
                     }
                 }
             });
