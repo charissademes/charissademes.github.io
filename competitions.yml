@@ -32,50 +32,22 @@ jobs:
           const fs = require('fs');
           const axios = require('axios');
 
-          // Helper: get current time in Europe/Amsterdam as a Date
-          function getAmsterdamNow() {
-            const now = new Date();
-            // format to parts in Amsterdam TZ
-            const fmt = new Intl.DateTimeFormat('en-CA', {
-              timeZone: 'Europe/Amsterdam',
-              year: 'numeric', month: '2-digit', day: '2-digit',
-              hour: '2-digit', minute: '2-digit', second: '2-digit',
-              hour12: false
-            });
-            const parts = fmt.formatToParts(now).reduce((acc, p) => {
-              if (p.type !== 'literal') acc[p.type] = p.value;
-              return acc;
-            }, {});
-            // Reconstruct a string and parse as UTC
-            return new Date(
-              `${parts.year}-${parts.month}-${parts.day}T${parts.hour}:${parts.minute}:${parts.second}+02:00`
-            );
-          }
-
           async function fetchCompetitions() {
             const filterName = 'Charissa de Mes';
             const matchingCompetitions = [];
-            const nowAmsterdam = getAmsterdamNow();
 
             try {
               const res = await axios.get('https://inschrijven.schaatsen.nl/api/competitions');
               const competitions = res.data;
 
               for (const comp of competitions) {
-                if (comp.discipline !== 'SpeedSkating.LongTrack') continue;
+                if (comp.discipline !== 'SpeedSkating.LongTrack') {
+                  continue; // skip if discipline doesn't match
+                }
 
                 try {
                   const competitionDetailRes = await axios.get('https://inschrijven.schaatsen.nl/api/competitions/' + comp.id);
                   const competition = competitionDetailRes.data;
-
-                  // Parse the competition start
-                  const starts = new Date(competition.starts);
-
-                  // ✅ Only keep competitions in the future (Amsterdam time)
-                  if (!(starts > nowAmsterdam)) {
-                    console.log(`(=) Skipping past/ongoing competition: ${competition.name} (${starts.toISOString()})`);
-                    continue;
-                  }
 
                   try {
                     const competitorsRes = await axios.get('https://inschrijven.schaatsen.nl/api/competitions/' + comp.id + '/competitors');
@@ -91,8 +63,8 @@ jobs:
                             const competitionUrl = `https://inschrijven.schaatsen.nl/#/wedstrijd/${comp.id}/informatie`;
                             matchingCompetitions.push({
                               name: competition.name,
-                              date: starts.toISOString().split('T')[0],
-                              time: starts.toISOString().split('T')[1].slice(0,5),
+                              date: new Date(competition.starts).toISOString().split('T')[0],
+                              time: new Date(competition.starts).toISOString().split('T')[1].slice(0,5),
                               city: competition.venue?.address?.city || '',
                               url: competitionUrl
                             });
@@ -104,8 +76,13 @@ jobs:
                       if (found) break;
                     }
 
-                    if (!found) console.log(`(-) No match for competition: ${competition.name}`);
-                    if (found) console.log(`(x) Match for competition: ${competition.name}`);
+                    if (!found) {
+                      console.log(`(-) No match for competition: ${competition.name}`);
+                    }
+
+                    if (found) {
+                      console.log(`(x) Match for competition: ${competition.name}`);
+                    }
 
                   } catch (err) {
                     console.error('Failed to fetch competitors for competition ' + comp.id + ':', err.message);
@@ -116,9 +93,6 @@ jobs:
                   console.error('Failed to fetch competition detail for ' + comp.id + ':', err.message);
                 }
               }
-
-              // Sort results by start date/time
-              matchingCompetitions.sort((a, b) => new Date(`${a.date}T${a.time}:00Z`) - new Date(`${b.date}T${b.time}:00Z`));
 
               fs.mkdirSync('./data', { recursive: true });
               fs.writeFileSync('./data/competitions.json', JSON.stringify(matchingCompetitions, null, 2));
