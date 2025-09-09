@@ -1,7 +1,0 @@
-name: pages-build-deployment
-
-on:
-  workflow_run:
-    workflows: ["fetch-competitions-for-charissa-de-mes"]
-    types:
-      - completed
