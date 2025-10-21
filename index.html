@@ -184,6 +184,70 @@
                             <!-- This will be populated dynamically -->
                         </tbody>
                     </table>
+
+                    <script>
+                        // Watch the table body and sort rows by Datum (column 1) then Tijd (column 2)
+                        (function() {
+                            const tbody = document.querySelector('#competitions-table tbody');
+                            if (!tbody) return;
+
+                            function parseDateString(s) {
+                                if (!s) return new Date(0);
+                                // Try ISO or Date.parse first
+                                const parsed = Date.parse(s);
+                                if (!isNaN(parsed)) return new Date(parsed);
+
+                                // Try DD-MM-YYYY or DD/MM/YYYY
+                                const m = s.match(/(\d{1,2})[\/\-\s](\d{1,2})[\/\-\s](\d{2,4})/);
+                                if (m) {
+                                    let day = m[1].padStart(2, '0');
+                                    let month = m[2].padStart(2, '0');
+                                    let year = m[3].length === 2 ? '20' + m[3] : m[3];
+                                    return new Date(`${year}-${month}-${day}`);
+                                }
+
+                                // Fallback
+                                return new Date(s);
+                            }
+
+                            function parseTimeString(s) {
+                                if (!s) return {h:0,m:0};
+                                const m = s.match(/(\d{1,2}):(\d{2})/);
+                                if (m) return {h: parseInt(m[1],10), m: parseInt(m[2],10)};
+                                return {h:0,m:0};
+                            }
+
+                            function rowDateTimeValue(row) {
+                                const dateText = row.children[1]?.innerText?.trim() || '';
+                                const timeText = row.children[2]?.innerText?.trim() || '';
+                                const d = parseDateString(dateText);
+                                const t = parseTimeString(timeText);
+                                d.setHours(t.h, t.m, 0, 0);
+                                return d.getTime();
+                            }
+
+                            const observer = new MutationObserver((mutations, obs) => {
+                                // Only proceed when there is at least one row
+                                if (tbody.children.length === 0) return;
+
+                                // Disconnect to avoid reacting to our own reordering
+                                obs.disconnect();
+
+                                const rows = Array.from(tbody.querySelectorAll('tr'));
+                                rows.sort((r1, r2) => {
+                                    const v1 = rowDateTimeValue(r1);
+                                    const v2 = rowDateTimeValue(r2);
+                                    return v1 - v2; // ascending: earliest date/time first
+                                });
+
+                                // Re-append in sorted order
+                                tbody.innerHTML = '';
+                                rows.forEach(r => tbody.appendChild(r));
+                            });
+
+                            observer.observe(tbody, { childList: true, subtree: false });
+                        })();
+                    </script>
                 </div>
                 <br>
                 <text class="small-font">Bron: <a href="https://inschrijven.schaatsen.nl/#/wedstrijden" target="_blank">inschrijven.schaatsen.nl</a></text>
