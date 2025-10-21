@@ -150,33 +150,33 @@
                 <div class="grey-text">
                     <img src="/media/charissa.png" alt="Charissa de Mes" style="width: 100%; height: auto; display: block; max-width: 100%;">
                     <h1>Charissa de Mes</h1>
-                    <p><strong>Leeftijd:</strong> 16 jaar</p>
-                    <p><strong>Categorie:</strong> Dames Junioren B2</p>
-                    <p><i>Charissa is een gepassioneerde schaatsster met een sterke motivatie en tomeloze gedrevenheid. Jaar na jaar weet zij haar persoonlijke tijden te verbeteren, dankzij haar enorme doorzettingsvermogen en vastberadenheid. Dit seizoen werkt Charissa hard om haar grote doel te bereiken: deelname aan het NK schaatsen voor junioren. Met haar toewijding en groeiende prestaties is ze goed op weg om die droom waar te maken.</i></p>
+                    <p><strong>Age:</strong> 16</p>
+                    <p><strong>Category:</strong> Ladies Juniors B2</p>
+                    <p><i>Charissa is a passionate skater with a strong motivation and tireless drive. Year after year she manages to improve her personal times thanks to her tremendous perseverance and determination. This season Charissa is working hard to achieve her big goal: qualifying for the Dutch National Championships for juniors. With her dedication and improving performances she is well on her way to making that dream come true.</i></p>
                     <br>
                     <a href="https://www.instagram.com/charissademes/" target="_blank"><img src="/media/instagram.png" style="filter: invert(1); height: 48px; width: auto;"></a>&nbsp;&nbsp;&nbsp;&nbsp;<img src="/media/tiktok.svg" style="filter: invert(1); height: 46px; width: 42px;">
                 </div>               
             </div>
 
             <div class="container">
-                <h2 class="grey-text">Persoonlijke records</h2>
+                <h2 class="grey-text">Personal records</h2>
                 <br>
-                <div id="output">Ophalen persoonlijke records...</div>
+                <div id="output">Retrieving personal records...</div>
                 <br>
-                <text class="small-font">Bron: <a href="https://speedskatingresults.com/index.php?p=17&s=92774" target="_blank">speedskatingresults.com</a></text>
+                <text class="small-font">Source: <a href="https://speedskatingresults.com/index.php?p=17&s=92774" target="_blank">speedskatingresults.com</a></text>
             </div>
 
             <div class="container">
-                <h2 class="grey-text">Aankomende wedstrijden</h2>
+                <h2 class="grey-text">Upcoming competitions</h2>
                 <br>
                 <div id="competitions-output">
                     <table id="competitions-table">
                         <thead>
                             <tr>
-                                <th>Naam</th>
-                                <th>Datum</th>
-                                <th>Tijd</th>
-                                <th>Plaats</th>
+                                <th>Name</th>
+                                <th>Date</th>
+                                <th>Time</th>
+                                <th>Location</th>
                                 <th>Details</th>
                             </tr>
                         </thead>
@@ -186,7 +186,7 @@
                     </table>
 
                     <script>
-                        // Watch the table body and sort rows by Datum (column 1) then Tijd (column 2)
+                        // Watch the table body and sort rows by Date (column 1) then Time (column 2)
                         (function() {
                             const tbody = document.querySelector('#competitions-table tbody');
                             if (!tbody) return;
@@ -250,7 +250,7 @@
                     </script>
                 </div>
                 <br>
-                <text class="small-font">Bron: <a href="https://inschrijven.schaatsen.nl/#/wedstrijden" target="_blank">inschrijven.schaatsen.nl</a></text>
+                <text class="small-font">Source: <a href="https://inschrijven.schaatsen.nl/#/wedstrijden" target="_blank">inschrijven.schaatsen.nl</a></text>
             </div>
 
             <div class="container">
@@ -288,7 +288,7 @@
             .then(response => response.json())
             .then(data => {
                 const records = data.records;
-                let table = '<table><tr><th>Afstand (m)</th><th>Tijd</th><th>Datum</th><th>Locatie</th></tr>';
+                let table = '<table><tr><th>Distance (m)</th><th>Time</th><th>Date</th><th>Location</th></tr>';
                 for (const key in records) {
                     const record = records[key];
                     table += `<tr>
@@ -325,13 +325,13 @@
                         tableBody.appendChild(row);
                     });
                 } else {
-                    tableBody.innerHTML = '<tr><td colspan="5">Geen aankomende wedstrijden beschikbaar.</td></tr>';
+                    tableBody.innerHTML = '<tr><td colspan="5">No upcoming competitions available.</td></tr>';
                 }
             })
             .catch(error => {
                 console.error('Error fetching data:', error);
                 const tableBody = document.querySelector('#competitions-table tbody');
-                tableBody.innerHTML = '<tr><td colspan="5">Kon wedstrijden niet laden.</td></tr>';
+                tableBody.innerHTML = '<tr><td colspan="5">Could not load competitions.</td></tr>';
             });
 
         function parseTimeToSeconds(timeStr) {
@@ -386,7 +386,7 @@
                 data: {
                     labels: labels,
                     datasets: [{
-                        label: 'Tijd (sec.)',
+                        label: 'Time (sec.)',
                         data: times,
                         borderColor: color,
                         fill: false,
@@ -400,16 +400,16 @@
                                 label: context => {
                                     const totalSec = context.raw;
                                     const formattedTime = formatSecondsToTime(totalSec);
-                                    return `Tijd: ${formattedTime}`;
+                                    return `Time: ${formattedTime}`;
                                 },
-                                afterLabel: context => `Locatie: ${locations[context.dataIndex]}`
+                                afterLabel: context => `Location: ${locations[context.dataIndex]}`
                             }
                         },
                         legend: { labels: { font: { family: 'Gabarito' } } }
                     },
                     scales: {
                         x: { ticks: { autoSkip: true, maxTicksLimit: 10, font: { family: 'Gabarito' } }},
-                        y: { beginAtZero: false, title: { display: true, text: 'Seconden', font: { family: 'Gabarito' } } }
+                        y: { beginAtZero: false, title: { display: true, text: 'Seconds', font: { family: 'Gabarito' } } }
                     }
                 }
             });

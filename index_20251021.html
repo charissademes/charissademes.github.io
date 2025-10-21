@@ -2,13 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Charissa de Mes - Dames Junior B2</title>
+    <title>Charissa de Mes - Speedskater</title>
+    <link rel="icon" type="image/x-icon" href="/media/favicon.ico">
     <link href="https://fonts.googleapis.com/css2?family=Gabarito&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         body {
             font-family: 'Gabarito', Arial, sans-serif;
-            background: url('/media/charissa_cartoon.png') no-repeat center center fixed;
+            background: url('/media/stadium.png') no-repeat center center fixed;
             background-size: cover;
             background-color: rgba(255, 255, 255, 0.6);
             background-blend-mode: lighten;
@@ -147,13 +148,13 @@
         <div class="left-section">
             <div class="container">
                 <div class="grey-text">
-                    <img src="/media/charissa.png" alt="Charissa de Mes">
+                    <img src="/media/charissa.png" alt="Charissa de Mes" style="width: 100%; height: auto; display: block; max-width: 100%;">
                     <h1>Charissa de Mes</h1>
                     <p><strong>Leeftijd:</strong> 16 jaar</p>
                     <p><strong>Categorie:</strong> Dames Junioren B2</p>
-                    <p>Charissa is een gepassioneerde schaatsster met een sterke motivatie en tomeloze gedrevenheid. Jaar na jaar weet zij haar persoonlijke tijden te verbeteren, dankzij haar enorme doorzettingsvermogen en vastberadenheid. Dit seizoen werkt Charissa hard om haar grote doel te bereiken: deelname aan het NK schaatsen voor junioren. Met haar toewijding en groeiende prestaties is ze goed op weg om die droom waar te maken.</p>
+                    <p><i>Charissa is een gepassioneerde schaatsster met een sterke motivatie en tomeloze gedrevenheid. Jaar na jaar weet zij haar persoonlijke tijden te verbeteren, dankzij haar enorme doorzettingsvermogen en vastberadenheid. Dit seizoen werkt Charissa hard om haar grote doel te bereiken: deelname aan het NK schaatsen voor junioren. Met haar toewijding en groeiende prestaties is ze goed op weg om die droom waar te maken.</i></p>
                     <br>
-                    <img src="/media/instagram.png" style="filter: invert(1); height: 48px; width: auto;">&nbsp;&nbsp;&nbsp;&nbsp;<img src="/media/tiktok.svg" style="filter: invert(1); height: 46px; width: 42px;">
+                    <a href="https://www.instagram.com/charissademes/" target="_blank"><img src="/media/instagram.png" style="filter: invert(1); height: 48px; width: auto;"></a>&nbsp;&nbsp;&nbsp;&nbsp;<img src="/media/tiktok.svg" style="filter: invert(1); height: 46px; width: 42px;">
                 </div>               
             </div>
 
@@ -183,13 +184,80 @@
                             <!-- This will be populated dynamically -->
                         </tbody>
                     </table>
+
+                    <script>
+                        // Watch the table body and sort rows by Datum (column 1) then Tijd (column 2)
+                        (function() {
+                            const tbody = document.querySelector('#competitions-table tbody');
+                            if (!tbody) return;
+
+                            function parseDateString(s) {
+                                if (!s) return new Date(0);
+                                // Try ISO or Date.parse first
+                                const parsed = Date.parse(s);
+                                if (!isNaN(parsed)) return new Date(parsed);
+
+                                // Try DD-MM-YYYY or DD/MM/YYYY
+                                const m = s.match(/(\d{1,2})[\/\-\s](\d{1,2})[\/\-\s](\d{2,4})/);
+                                if (m) {
+                                    let day = m[1].padStart(2, '0');
+                                    let month = m[2].padStart(2, '0');
+                                    let year = m[3].length === 2 ? '20' + m[3] : m[3];
+                                    return new Date(`${year}-${month}-${day}`);
+                                }
+
+                                // Fallback
+                                return new Date(s);
+                            }
+
+                            function parseTimeString(s) {
+                                if (!s) return {h:0,m:0};
+                                const m = s.match(/(\d{1,2}):(\d{2})/);
+                                if (m) return {h: parseInt(m[1],10), m: parseInt(m[2],10)};
+                                return {h:0,m:0};
+                            }
+
+                            function rowDateTimeValue(row) {
+                                const dateText = row.children[1]?.innerText?.trim() || '';
+                                const timeText = row.children[2]?.innerText?.trim() || '';
+                                const d = parseDateString(dateText);
+                                const t = parseTimeString(timeText);
+                                d.setHours(t.h, t.m, 0, 0);
+                                return d.getTime();
+                            }
+
+                            const observer = new MutationObserver((mutations, obs) => {
+                                // Only proceed when there is at least one row
+                                if (tbody.children.length === 0) return;
+
+                                // Disconnect to avoid reacting to our own reordering
+                                obs.disconnect();
+
+                                const rows = Array.from(tbody.querySelectorAll('tr'));
+                                rows.sort((r1, r2) => {
+                                    const v1 = rowDateTimeValue(r1);
+                                    const v2 = rowDateTimeValue(r2);
+                                    return v1 - v2; // ascending: earliest date/time first
+                                });
+
+                                // Re-append in sorted order
+                                tbody.innerHTML = '';
+                                rows.forEach(r => tbody.appendChild(r));
+                            });
+
+                            observer.observe(tbody, { childList: true, subtree: false });
+                        })();
+                    </script>
                 </div>
+                <br>
+                <text class="small-font">Bron: <a href="https://inschrijven.schaatsen.nl/#/wedstrijden" target="_blank">inschrijven.schaatsen.nl</a></text>
             </div>
 
             <div class="container">
                 <h2 class="grey-text">Sponsors</h2>
                 <br>
-                <img src="/media/sponsor_example1.png" style="border-radius: 0px; height: 100px; width: auto;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="/media/sponsor_example2.png" style="border-radius: 0px; height: 100px; width: auto;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="/media/sponsor_example3.png" style="border-radius: 0px; height: 100px; width: auto;">
+                <img src="/media/sponsor_example1.png" style="border-radius: 0px; height: 140px; width: auto;">
+                <!-- <img src="/media/height40_hm_sponsor_example1.png" style="display:block; width:50%; max-width:100%; height:auto; margin:0 auto; border-radius:0;"> -->
             </div>
         </div>
 
@@ -209,6 +277,8 @@
             <h2>3000m</h2>
             <hr size="-1">
             <canvas id="resultsChart3000"></canvas>
+            <br><br>
+            <center><text class="small-font" style="color: #000000">Bron: <a href="https://speedskatingresults.com/index.php?p=17&s=92774" target="_blank" style="color: #000000">speedskatingresults.com</a></text></center>
         </div>
     </div>
 
@@ -255,13 +325,13 @@
                         tableBody.appendChild(row);
                     });
                 } else {
-                    tableBody.innerHTML = '<tr><td colspan="5">No upcoming competitions available.</td></tr>';
+                    tableBody.innerHTML = '<tr><td colspan="5">Geen aankomende wedstrijden beschikbaar.</td></tr>';
                 }
             })
             .catch(error => {
                 console.error('Error fetching data:', error);
                 const tableBody = document.querySelector('#competitions-table tbody');
-                tableBody.innerHTML = '<tr><td colspan="5">Failed to load competitions.</td></tr>';
+                tableBody.innerHTML = '<tr><td colspan="5">Kon wedstrijden niet laden.</td></tr>';
             });
 
         function parseTimeToSeconds(timeStr) {
@@ -316,7 +386,7 @@
                 data: {
                     labels: labels,
                     datasets: [{
-                        label: 'Time (s)',
+                        label: 'Tijd (sec.)',
                         data: times,
                         borderColor: color,
                         fill: false,
@@ -330,16 +400,16 @@
                                 label: context => {
                                     const totalSec = context.raw;
                                     const formattedTime = formatSecondsToTime(totalSec);
-                                    return `Time: ${formattedTime}`;
+                                    return `Tijd: ${formattedTime}`;
                                 },
-                                afterLabel: context => `Location: ${locations[context.dataIndex]}`
+                                afterLabel: context => `Locatie: ${locations[context.dataIndex]}`
                             }
                         },
                         legend: { labels: { font: { family: 'Gabarito' } } }
                     },
                     scales: {
                         x: { ticks: { autoSkip: true, maxTicksLimit: 10, font: { family: 'Gabarito' } }},
-                        y: { beginAtZero: false, title: { display: true, text: 'Seconds', font: { family: 'Gabarito' } } }
+                        y: { beginAtZero: false, title: { display: true, text: 'Seconden', font: { family: 'Gabarito' } } }
                     }
                 }
             });
