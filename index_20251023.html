@@ -4,11 +4,11 @@
     <meta charset="UTF-8">
     <title>Charissa de Mes - Speedskater</title>
     <link rel="icon" type="image/x-icon" href="/media/favicon.ico">
-    <link href="https://fonts.googleapis.com/css2?family=Oregano:ital@0;1&family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Gabarito&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         body {
-            font-family: 'Quicksand', Arial, sans-serif;
+            font-family: 'Gabarito', Arial, sans-serif;
             background: url('/media/stadium.png') no-repeat center center fixed;
             background-size: cover;
             background-color: rgba(255, 255, 255, 0.6);
@@ -149,26 +149,17 @@
             <div class="container">
                 <div class="grey-text">
                     <img src="/media/charissa.png" alt="Charissa de Mes" style="width: 100%; height: auto; display: block; max-width: 100%;">
-                    <h2>Charissa de Mes</h2>
+                    <h1>Charissa de Mes</h1>
                     <p><strong>Age:</strong> 16</p>
                     <p><strong>Category:</strong> Ladies Juniors B2</p>
-                    <p><strong>Track type:</strong> Long track</p>
-                    <p><strong>Favorite distance:</strong> 3000m</p>
-                    <hr size="-1">
                     <p><i>Charissa is a passionate speedskater with a strong motivation and tireless drive. Year after year she manages to improve her personal records thanks to her tremendous perseverance and determination. This season Charissa is working hard to achieve her big goal: qualifying for the Dutch National Championships for juniors. With her dedication and improving performances she is well on her way to making that dream come true.</i></p>
-                    <hr size="-1">
                     <br>
-                    <a href="https://www.instagram.com/charissademes/" target="_blank"
-                        onmouseover="this.querySelector('img').style.transform='scale(1.1)';"
-                        onmouseout="this.querySelector('img').style.transform='scale(1)';">
-                         <img src="/media/instagram.webp" style="height: 48px; width: auto; transition: transform 0.2s ease; display: inline-block;">
-                    </a>
-                    <!-- &nbsp;&nbsp;&nbsp;&nbsp;<img src="/media/tiktok.svg" style="filter: invert(1); height: 46px; width: 42px;"> -->
+                    <a href="https://www.instagram.com/charissademes/" target="_blank"><img src="/media/instagram.png" style="filter: invert(1); height: 48px; width: auto;"></a>&nbsp;&nbsp;&nbsp;&nbsp;<img src="/media/tiktok.svg" style="filter: invert(1); height: 46px; width: 42px;">
                 </div>               
             </div>
 
             <div class="container">
-                <h2 class="grey-text">&#127941; Personal records</h2>
+                <h2 class="grey-text">Personal records</h2>
                 <br>
                 <div id="output">Retrieving personal records...</div>
                 <br>
@@ -176,7 +167,7 @@
             </div>
 
             <div class="container">
-                <h2 class="grey-text">&#128197; Upcoming competitions</h2>
+                <h2 class="grey-text">Upcoming competitions</h2>
                 <br>
                 <div id="competitions-output">
                     <table id="competitions-table">
@@ -263,7 +254,7 @@
             </div>
 
             <div class="container">
-                <h2 class="grey-text">&#128150; Sponsors</h2>
+                <h2 class="grey-text">Sponsors</h2>
                 <br>
                 <img src="/media/sponsor_example1.png" style="border-radius: 0px; height: 140px; width: auto;">
                 <!-- <img src="/media/height40_hm_sponsor_example1.png" style="display:block; width:50%; max-width:100%; height:auto; margin:0 auto; border-radius:0;"> -->
@@ -271,7 +262,7 @@
         </div>
 
         <div class="charts-container">
-            <center><h2>&#128200; Statistics</h2></center>
+            <center><h2>Statistics</h2></center>
             <br>
             <h3 style="margin: 0 0 4px 0;">500m</h3>
             <hr style="margin: 4px 0 12px 0; border: 0; height: 1px; background: rgba(0,0,0,0.2);">
@@ -331,7 +322,7 @@
                             <td>${comp.date}</td>
                             <td>${comp.time}</td>
                             <td>${comp.city}</td>
-                            <td style="text-align: center;"><a href="${comp.url}" target="_blank" style="color: #000000; text-decoration: none; font-size: 24px;">&#128279;</a></td>
+                            <td style="text-align: center;"><a href="${comp.url}" target="_blank" style="color: #000000; text-decoration: none; font-size: 24px;">&#128712;</a></td>
                         `;
                         tableBody.appendChild(row);
                     });
@@ -385,51 +376,44 @@
             data.results.sort((a, b) => new Date(a.date) - new Date(b.date));
             const labels = [], times = [], locations = [];
             data.results.forEach(result => {
-            labels.push(result.date);
-            locations.push(result.location);
-            const totalSeconds = parseTimeToSeconds(result.time);
-            times.push(totalSeconds);
+                labels.push(result.date);
+                locations.push(result.location);
+                const totalSeconds = parseTimeToSeconds(result.time);
+                times.push(totalSeconds);
             });
 
             const ctx = document.getElementById(chartId).getContext('2d');
             new Chart(ctx, {
-            type: 'line',
-            data: {
-                labels: labels,
-                datasets: [{
-                label: 'Time (sec.)',
-                data: times,
-                borderColor: color,
-                fill: false,
-                tension: 0.1
-                }]
-            },
-            options: {
-                plugins: {
-                tooltip: {
-                    titleFont: { family: 'Quicksand' },
-                    bodyFont: { family: 'Quicksand' },
-                    footerFont: { family: 'Quicksand' },
-                    callbacks: {
-                    label: context => {
-                        const totalSec = context.raw;
-                        const formattedTime = formatSecondsToTime(totalSec);
-                        return `Time: ${formattedTime}`;
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Time (sec.)',
+                        data: times,
+                        borderColor: color,
+                        fill: false,
+                        tension: 0.1
+                    }]
+                },
+                options: {
+                    plugins: {
+                        tooltip: {
+                            callbacks: {
+                                label: context => {
+                                    const totalSec = context.raw;
+                                    const formattedTime = formatSecondsToTime(totalSec);
+                                    return `Time: ${formattedTime}`;
+                                },
+                                afterLabel: context => `Location: ${locations[context.dataIndex]}`
+                            }
+                        },
+                        legend: { labels: { font: { family: 'Gabarito' } } }
                     },
-                    afterLabel: context => `Location: ${locations[context.dataIndex]}`
+                    scales: {
+                        x: { ticks: { autoSkip: true, maxTicksLimit: 10, font: { family: 'Gabarito' } }},
+                        y: { beginAtZero: false, title: { display: true, text: 'Seconds', font: { family: 'Gabarito' } } }
                     }
-                },
-                legend: { labels: { font: { family: 'Quicksand' } } }
-                },
-                scales: {
-                x: { ticks: { autoSkip: true, maxTicksLimit: 10, font: { family: 'Quicksand' } }},
-                y: {
-                    beginAtZero: false,
-                    title: { display: true, text: 'Seconds', font: { family: 'Quicksand' } },
-                    ticks: { font: { family: 'Quicksand' } }
                 }
-                }
-            }
             });
         }
 
