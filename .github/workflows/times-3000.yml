@@ -64,6 +64,6 @@ jobs:
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
-          git add data/500.json
-          git commit -m "Update 500m results" || echo "No changes to commit"
+          git add data/3000.json
+          git commit -m "Update 3000m results" || echo "No changes to commit"
           git push origin HEAD
