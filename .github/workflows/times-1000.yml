@@ -2,14 +2,14 @@ name: fetch-1000m-times-for-charissa-de-mes
 
 on:
   schedule:
-    - cron: '0 2 * * *'  # Runs daily at 2 AM UTC
+    - cron: '1 2 * * *'  # Runs daily at 2 AM UTC
   workflow_dispatch:
 
 permissions:
   contents: write
 
 jobs:
-  fetch-500m-times:
+  fetch-1000m-times:
     runs-on: ubuntu-latest
 
     steps:
@@ -21,7 +21,7 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Fetch 500m times
+      - name: Fetch 1000m times
         run: |
           mkdir -p data
           node <<'EOF'
@@ -51,8 +51,9 @@ jobs:
 
             try {
               const json = await fetchJson(url);
-              fs.writeFileSync(outPath, JSON.stringify(json, null, 2) + '\\n', 'utf-8');
-              console.log('Saved 500m times to', outPath);
+              // ✅ Save without trailing newline
+              fs.writeFileSync(outPath, JSON.stringify(json, null, 2), 'utf-8');
+              console.log('Saved 1000m times to', outPath);
             } catch (err) {
               console.error('Error fetching 1000m times:', err.message);
               process.exit(1);
@@ -64,6 +65,6 @@ jobs:
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
-          git add data/1000.json
+          git add data/500.json
           git commit -m "Update 1000m results" || echo "No changes to commit"
           git push origin HEAD

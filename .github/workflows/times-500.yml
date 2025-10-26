@@ -51,7 +51,8 @@ jobs:
 
             try {
               const json = await fetchJson(url);
-              fs.writeFileSync(outPath, JSON.stringify(json, null, 2) + '\\n', 'utf-8');
+              // ✅ Save without trailing newline
+              fs.writeFileSync(outPath, JSON.stringify(json, null, 2), 'utf-8');
               console.log('Saved 500m times to', outPath);
             } catch (err) {
               console.error('Error fetching 500m times:', err.message);
