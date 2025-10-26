@@ -2,7 +2,7 @@ name: fetch-1000m-times-for-charissa-de-mes
 
 on:
   schedule:
-    - cron: '1 2 * * *'  # Runs daily at 2 AM UTC
+    - cron: '0 2 * * *'  # Runs daily at 2 AM UTC
   workflow_dispatch:
 
 permissions:
@@ -65,6 +65,6 @@ jobs:
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
-          git add data/500.json
+          git add data/1000.json
           git commit -m "Update 1000m results" || echo "No changes to commit"
           git push origin HEAD
