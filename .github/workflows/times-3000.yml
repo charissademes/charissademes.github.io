@@ -1,4 +1,4 @@
-name: fetch-500m-times-for-charissa-de-mes
+name: fetch-3000m-times-for-charissa-de-mes
 
 on:
   schedule:
