@@ -1,0 +1,69 @@
+name: fetch-500m-times-for-charissa-de-mes
+
+on:
+  schedule:
+    - cron: '0 2 * * *'  # Runs daily at 2 AM UTC
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  fetch-500m-times:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Fetch 500m times
+        run: |
+          mkdir -p data
+          node <<'EOF'
+          (async () => {
+            const fs = require('fs');
+            const https = require('https');
+
+            function fetchJson(url) {
+              return new Promise((resolve, reject) => {
+                https.get(url, (res) => {
+                  let data = '';
+                  res.on('data', chunk => data += chunk);
+                  res.on('end', () => {
+                    try {
+                      const json = JSON.parse(data);
+                      resolve(json);
+                    } catch (err) {
+                      reject(new Error('Invalid JSON response'));
+                    }
+                  });
+                }).on('error', reject);
+              });
+            }
+
+            const url = 'https://speedskatingresults.com/api/json/skater_results.php?skater=92774&distance=500';
+            const outPath = 'data/500.json';
+
+            try {
+              const json = await fetchJson(url);
+              fs.writeFileSync(outPath, JSON.stringify(json, null, 2) + '\\n', 'utf-8');
+              console.log('Saved 500m times to', outPath);
+            } catch (err) {
+              console.error('Error fetching 500m times:', err.message);
+              process.exit(1);
+            }
+          })();
+          EOF
+
+      - name: Commit and push changes
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add data/500.json
+          git commit -m "Update 500m results" || echo "No changes to commit"
+          git push origin HEAD
