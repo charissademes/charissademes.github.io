@@ -1,0 +1,475 @@
+{
+  "skater": 92774,
+  "distance": 500,
+  "results": [
+    {
+      "time": "43,84",
+      "date": "2025-01-05",
+      "location": "Heerenveen (NED)",
+      "name": "Recordwedstrijd-8 Thialf",
+      "link": "http://speedskatingresults.com/index.php?p=3&e=29547&r=10001&s=92774"
+    },
+    {
+      "time": "43,90",
+      "date": "2025-02-22",
+      "location": "Heerenveen (NED)",
+      "name": "Schaatscircuit.nl",
+      "link": "http://speedskatingresults.com/index.php?p=3&e=30111&r=10001&s=92774"
+    },
+    {
+      "time": "44,10",
+      "date": "2025-10-25",
+      "location": "Leeuwarden (NED)",
+      "name": "Selectie wedstrijd BGA, Haarlem, Hoorn en Alkmaar",
+      "link": "http://speedskatingresults.com/index.php?p=3&e=30598&r=10001&s=92774"
+    },
+    {
+      "time": "44,61",
+      "date": "2024-12-01",
+      "location": "Heerenveen (NED)",
+      "name": "Recordwedstrijd-7 Thialf",
+      "link": "http://speedskatingresults.com/index.php?p=3&e=29190&r=10001&s=92774"
+    },
+    {
+      "time": "44,61",
+      "date": "2024-12-31",
+      "location": "Heerenveen (NED)",
+      "name": "Koninklijke Thialf - HCH Jeugdwedstrijd",
+      "link": "http://speedskatingresults.com/index.php?p=3&e=29506&r=5&s=92774"
+    },
+    {
+      "time": "44,66",
+      "date": "2025-02-15",
+      "location": "Leeuwarden (NED)",
+      "name": "Schaatscircuit.nl",
+      "link": "http://speedskatingresults.com/index.php?p=3&e=30037&r=10001&s=92774"
+    },
+    {
+      "time": "44,94",
+      "date": "2025-03-03",
+      "location": "Heerenveen (NED)",
+      "name": "Trainingswedstrijd + Gewestelijke Wedstrijd Pupillen B en Ouder",
+      "link": "http://speedskatingresults.com/index.php?p=3&e=30189&r=10003&s=92774"
+    },
+    {
+      "time": "45,00",
+      "date": "2025-03-01",
+      "location": "Enschede (NED)",
+      "name": "Baankaarthouders Alle Klassen 5",
+      "link": "http://speedskatingresults.com/index.php?p=3&e=30170&r=10006&s=92774"
+    },
+    {
+      "time": "45,03",
+      "date": "2025-10-19",
+      "location": "Leeuwarden (NED)",
+      "name": "Elfstedenhal Gewestelijke Wedstrijd",
+      "link": "http://speedskatingresults.com/index.php?p=3&e=30567&r=10002&s=92774"
+    },
+    {
+      "time": "45,24",
+      "date": "2025-02-01",
+      "location": "Alkmaar (NED)",
+      "name": "Clubwedstrijd CHZNKHH",
+      "link": "http://speedskatingresults.com/index.php?p=3&e=29860&r=10002&s=92774"
+    },
+    {
+      "time": "45,69",
+      "date": "2025-02-08",
+      "location": "Groningen (NED)",
+      "name": "Landelijke Selectie NK Junioren A/B (Sprint / 3000m)",
+      "link": "http://speedskatingresults.com/index.php?p=3&e=29944&r=1&s=92774"
+    },
+    {
+      "time": "45,86",
+      "date": "2025-02-16",
+      "location": "Alkmaar (NED)",
+      "name": "Categorie Pure Sprint Wedstrijd",
+      "link": "http://speedskatingresults.com/index.php?p=3&e=30051&r=10006&s=92774"
+    },
+    {
+      "time": "45,87",
+      "date": "2024-12-07",
+      "location": "Alkmaar (NED)",
+      "name": "BVA 4 Kamp",
+      "link": "http://speedskatingresults.com/index.php?p=3&e=29268&r=1&s=92774"
+    },
+    {
+      "time": "45,90",
+      "date": "2024-11-24",
+      "location": "Heerenveen (NED)",
+      "name": "Recordwedstrijd-6 Thialf",
+      "link": "http://speedskatingresults.com/index.php?p=3&e=29122&r=10001&s=92774"
+    },
+    {
+      "time": "46,07",
+      "date": "2024-11-18",
+      "location": "Heerenveen (NED)",
+      "name": "Schaatscircuit.nl",
+      "link": "http://speedskatingresults.com/index.php?p=3&e=29082&r=10001&s=92774"
+    },
+    {
+      "time": "46,93",
+      "date": "2024-10-20",
+      "location": "Heerenveen (NED)",
+      "name": "Recordwedstrijd-3",
+      "link": "http://speedskatingresults.com/index.php?p=3&e=28886&r=10001&s=92774"
+    },
+    {
+      "time": "46,93",
+      "date": "2024-11-02",
+      "location": "Leeuwarden (NED)",
+      "name": "Selectie Wedstrijd BGA in Leeuwarden",
+      "link": "http://speedskatingresults.com/index.php?p=3&e=28963&r=10002&s=92774"
+    },
+    {
+      "time": "47,04",
+      "date": "2024-12-14",
+      "location": "Alkmaar (NED)",
+      "name": "Clubwedstrijd AIJC 3",
+      "link": "http://speedskatingresults.com/index.php?p=3&e=29336&r=10001&s=92774"
+    },
+    {
+      "time": "47,30",
+      "date": "2024-10-26",
+      "location": "Heerenveen (NED)",
+      "name": "Schaatscircuit.nl",
+      "link": "http://speedskatingresults.com/index.php?p=3&e=28909&r=10001&s=92774"
+    },
+    {
+      "time": "47,32",
+      "date": "2024-11-09",
+      "location": "Alkmaar (NED)",
+      "name": "Clubwedstrijd CHZNKHH",
+      "link": "http://speedskatingresults.com/index.php?p=3&e=29010&r=10001&s=92774"
+    },
+    {
+      "time": "47,35",
+      "date": "2024-03-04",
+      "location": "Heerenveen (NED)",
+      "name": "Schaatscircuit.nl",
+      "link": "http://speedskatingresults.com/index.php?p=3&e=28545&r=10001&s=92774"
+    },
+    {
+      "time": "48,14",
+      "date": "2024-02-19",
+      "location": "Heerenveen (NED)",
+      "name": "Schaatscircuit.nl",
+      "link": "http://speedskatingresults.com/index.php?p=3&e=28406&r=10001&s=92774"
+    },
+    {
+      "time": "48,24",
+      "date": "2024-02-10",
+      "location": "Heerenveen (NED)",
+      "name": "Schaatscircuit.nl",
+      "link": "http://speedskatingresults.com/index.php?p=3&e=28291&r=10001&s=92774"
+    },
+    {
+      "time": "48,48",
+      "date": "2024-01-27",
+      "location": "Alkmaar (NED)",
+      "name": "Clubwedstrijd CHZNKHH",
+      "link": "http://speedskatingresults.com/index.php?p=3&e=28141&r=10002&s=92774"
+    },
+    {
+      "time": "48,78",
+      "date": "2024-10-13",
+      "location": "Heerenveen (NED)",
+      "name": "Recordwedstrijd-2",
+      "link": "http://speedskatingresults.com/index.php?p=3&e=28841&r=10001&s=92774"
+    },
+    {
+      "time": "48,90",
+      "date": "2024-01-06",
+      "location": "Leeuwarden (NED)",
+      "name": "Schaatscircuit.nl",
+      "link": "http://speedskatingresults.com/index.php?p=3&e=27859&r=10001&s=92774"
+    },
+    {
+      "time": "48,95",
+      "date": "2023-12-09",
+      "location": "Heerenveen (NED)",
+      "name": "Schaatscircuit.nl",
+      "link": "http://speedskatingresults.com/index.php?p=3&e=27577&r=10001&s=92774"
+    },
+    {
+      "time": "49,13",
+      "date": "2024-02-03",
+      "location": "Enschede (NED)",
+      "name": "Open Baanwedstrijd",
+      "link": "http://speedskatingresults.com/index.php?p=3&e=28199&r=10001&s=92774"
+    },
+    {
+      "time": "49,15",
+      "date": "2024-02-18",
+      "location": "Haarlem (NED)",
+      "name": "Finale: Gewestelijke Puntenwedstrijd - Jun C",
+      "link": "http://speedskatingresults.com/index.php?p=3&e=28391&r=1&s=92774"
+    },
+    {
+      "time": "49,17",
+      "date": "2024-02-17",
+      "location": "Alkmaar (NED)",
+      "name": "Clubwedstrijd CHZNKHH",
+      "link": "http://speedskatingresults.com/index.php?p=3&e=28376&r=10002&s=92774"
+    },
+    {
+      "time": "49,36",
+      "date": "2024-03-02",
+      "location": "Alkmaar (NED)",
+      "name": "44e Volharding Bokaal",
+      "link": "http://speedskatingresults.com/index.php?p=3&e=28542&r=10005&s=92774"
+    },
+    {
+      "time": "49,45",
+      "date": "2023-12-16",
+      "location": "Alkmaar (NED)",
+      "name": "Categorie Wedstrijd Pupillen t/m Masters",
+      "link": "http://speedskatingresults.com/index.php?p=3&e=27679&r=10001&s=92774"
+    },
+    {
+      "time": "50,05",
+      "date": "2023-11-18",
+      "location": "Hoorn (NED)",
+      "name": "Gewestelijke Puntenwedstrijd Jun C",
+      "link": "http://speedskatingresults.com/index.php?p=3&e=27382&r=1&s=92774"
+    },
+    {
+      "time": "50,15",
+      "date": "2023-12-02",
+      "location": "Haarlem (NED)",
+      "name": "Gewestelijke Jun C Punten Wedstrijd IV",
+      "link": "http://speedskatingresults.com/index.php?p=3&e=27507&r=1&s=92774"
+    },
+    {
+      "time": "50,32",
+      "date": "2023-10-29",
+      "location": "Alkmaar (NED)",
+      "name": "Categorie van Pup tot Masters",
+      "link": "http://speedskatingresults.com/index.php?p=3&e=27251&r=10002&s=92774"
+    },
+    {
+      "time": "50,39",
+      "date": "2023-11-26",
+      "location": "Alkmaar (NED)",
+      "name": "Clubwed. CHZNKHH",
+      "link": "http://speedskatingresults.com/index.php?p=3&e=27453&r=10002&s=92774"
+    },
+    {
+      "time": "50,43",
+      "date": "2024-01-13",
+      "location": "Alkmaar (NED)",
+      "name": "Clubwed. LUCGA",
+      "link": "http://speedskatingresults.com/index.php?p=3&e=27935&r=10002&s=92774"
+    },
+    {
+      "time": "50,50",
+      "date": "2023-10-21",
+      "location": "Utrecht (NED)",
+      "name": "Puntenwedstrijd Jun C",
+      "link": "http://speedskatingresults.com/index.php?p=3&e=27201&r=1&s=92774"
+    },
+    {
+      "time": "50,53",
+      "date": "2023-11-04",
+      "location": "Alkmaar (NED)",
+      "name": "Puntenwedstrijd - Jun C",
+      "link": "http://speedskatingresults.com/index.php?p=3&e=27284&r=1&s=92774"
+    },
+    {
+      "time": "51,08",
+      "date": "2023-10-28",
+      "location": "Alkmaar (NED)",
+      "name": "Categorie Wedstrijd Vanaf Pup A tot Master",
+      "link": "http://speedskatingresults.com/index.php?p=3&e=27235&r=10002&s=92774"
+    },
+    {
+      "time": "51,37",
+      "date": "2023-11-11",
+      "location": "Alkmaar (NED)",
+      "name": "Clubwed. CHZNKHH",
+      "link": "http://speedskatingresults.com/index.php?p=3&e=27332&r=10002&s=92774"
+    },
+    {
+      "time": "51,48",
+      "date": "2023-03-04",
+      "location": "Alkmaar (NED)",
+      "name": "Clubwed. LUCGA",
+      "link": "http://speedskatingresults.com/index.php?p=3&e=26854&r=10002&s=92774"
+    },
+    {
+      "time": "51,61",
+      "date": "2023-02-26",
+      "location": "Alkmaar (NED)",
+      "name": "Clubwed. CHZNKHH",
+      "link": "http://speedskatingresults.com/index.php?p=3&e=26802&r=10002&s=92774"
+    },
+    {
+      "time": "51,81",
+      "date": "2023-03-18",
+      "location": "Nijmegen (NED)",
+      "name": "Lacustris Final Races",
+      "link": "http://speedskatingresults.com/index.php?p=3&e=26989&r=10001&s=92774"
+    },
+    {
+      "time": "51,99",
+      "date": "2023-02-11",
+      "location": "Alkmaar (NED)",
+      "name": "Volharding Bokaal",
+      "link": "http://speedskatingresults.com/index.php?p=3&e=26638&r=10005&s=92774"
+    },
+    {
+      "time": "52,13",
+      "date": "2023-02-25",
+      "location": "Alkmaar (NED)",
+      "name": "Clubwed. AIJC",
+      "link": "http://speedskatingresults.com/index.php?p=3&e=26784&r=10002&s=92774"
+    },
+    {
+      "time": "52,40",
+      "date": "2023-02-04",
+      "location": "Alkmaar (NED)",
+      "name": "Clubwed. LUCGA",
+      "link": "http://speedskatingresults.com/index.php?p=3&e=26558&r=10002&s=92774"
+    },
+    {
+      "time": "52,51",
+      "date": "2023-01-28",
+      "location": "Hoorn (NED)",
+      "name": "Gewestelijke Puntenwedstrijd Jun C (Finale)",
+      "link": "http://speedskatingresults.com/index.php?p=3&e=26455&r=1&s=92774"
+    },
+    {
+      "time": "53,50",
+      "date": "2023-01-08",
+      "location": "Alkmaar (NED)",
+      "name": "SFA Pupillen Cup 3 + C1",
+      "link": "http://speedskatingresults.com/index.php?p=3&e=26236&r=10002&s=92774"
+    },
+    {
+      "time": "54,03",
+      "date": "2022-12-17",
+      "location": "Alkmaar (NED)",
+      "name": "Clubwed. CHZNKHH",
+      "link": "http://speedskatingresults.com/index.php?p=3&e=26066&r=10002&s=92774"
+    },
+    {
+      "time": "54,20",
+      "date": "2022-11-20",
+      "location": "Alkmaar (NED)",
+      "name": "Clubwed. AIJC",
+      "link": "http://speedskatingresults.com/index.php?p=3&e=25808&r=10002&s=92774"
+    },
+    {
+      "time": "54,29",
+      "date": "2022-11-12",
+      "location": "Alkmaar (NED)",
+      "name": "Clubwedstrijd",
+      "link": "http://speedskatingresults.com/index.php?p=3&e=25748&r=10001&s=92774"
+    },
+    {
+      "time": "54,31",
+      "date": "2022-10-23",
+      "location": "Alkmaar (NED)",
+      "name": "Clubwed. CHZNKHH",
+      "link": "http://speedskatingresults.com/index.php?p=3&e=25636&r=10002&s=92774"
+    },
+    {
+      "time": "54,36",
+      "date": "2022-11-19",
+      "location": "Alkmaar (NED)",
+      "name": "Clubwed. CHZNKHH",
+      "link": "http://speedskatingresults.com/index.php?p=3&e=25788&r=10002&s=92774"
+    },
+    {
+      "time": "54,41",
+      "date": "2022-12-10",
+      "location": "Amsterdam (NED)",
+      "name": "Gewestelijke Puntenwedstrijd Junioren C",
+      "link": "http://speedskatingresults.com/index.php?p=3&e=25984&r=1&s=92774"
+    },
+    {
+      "time": "54,42",
+      "date": "2023-01-15",
+      "location": "Alkmaar (NED)",
+      "name": "Clubwed. LUCGA",
+      "link": "http://speedskatingresults.com/index.php?p=3&e=26305&r=10002&s=92774"
+    },
+    {
+      "time": "54,83",
+      "date": "2022-10-30",
+      "location": "Alkmaar (NED)",
+      "name": "Clubwed. LUCGA",
+      "link": "http://speedskatingresults.com/index.php?p=3&e=25676&r=10002&s=92774"
+    },
+    {
+      "time": "55,01",
+      "date": "2022-10-22",
+      "location": "Alkmaar (NED)",
+      "name": "Categorie Wedstrijd 500/1000/1500/3km",
+      "link": "http://speedskatingresults.com/index.php?p=3&e=25620&r=10001&s=92774"
+    },
+    {
+      "time": "56,06",
+      "date": "2023-01-21",
+      "location": "Alkmaar (NED)",
+      "name": "AIJC Club Wedstrijd",
+      "link": "http://speedskatingresults.com/index.php?p=3&e=26394&r=10002&s=92774"
+    },
+    {
+      "time": "56,31",
+      "date": "2022-11-05",
+      "location": "Alkmaar (NED)",
+      "name": "Clubwed. CHZNKHH",
+      "link": "http://speedskatingresults.com/index.php?p=3&e=25704&r=10002&s=92774"
+    },
+    {
+      "time": "57,02",
+      "date": "2022-10-16",
+      "location": "Alkmaar (NED)",
+      "name": "Clubwed. AIJC",
+      "link": "http://speedskatingresults.com/index.php?p=3&e=25585&r=10002&s=92774"
+    },
+    {
+      "time": "1.00,71",
+      "date": "2022-01-30",
+      "location": "Alkmaar (NED)",
+      "name": "Clubwedstrijd LUC",
+      "link": "http://speedskatingresults.com/index.php?p=3&e=24898&r=10002&s=92774"
+    },
+    {
+      "time": "1.01,11",
+      "date": "2022-01-23",
+      "location": "Alkmaar (NED)",
+      "name": "SFA Categorie",
+      "link": "http://speedskatingresults.com/index.php?p=3&e=24821&r=10002&s=92774"
+    },
+    {
+      "time": "1.04,17",
+      "date": "2021-10-24",
+      "location": "Alkmaar (NED)",
+      "name": "Clubwed. LUC Open",
+      "link": "http://speedskatingresults.com/index.php?p=3&e=24176&r=10002&s=92774"
+    },
+    {
+      "time": "1.04,46",
+      "date": "2022-01-15",
+      "location": "Alkmaar (NED)",
+      "name": "SFA Wedstrijd",
+      "link": "http://speedskatingresults.com/index.php?p=3&e=24742&r=10002&s=92774"
+    },
+    {
+      "time": "1.27,14",
+      "date": "2022-02-06",
+      "location": "Alkmaar (NED)",
+      "name": "Clubwedstrijd HG Open",
+      "link": "http://speedskatingresults.com/index.php?p=3&e=24992&r=10001&s=92774"
+    },
+    {
+      "time": "1.27,73",
+      "date": "2021-11-13",
+      "location": "Alkmaar (NED)",
+      "name": "Clubwedstrijd HG Open",
+      "link": "http://speedskatingresults.com/index.php?p=3&e=24290&r=10001&s=92774"
+    }
+  ]
+}\n
