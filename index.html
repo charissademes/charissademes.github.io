@@ -295,7 +295,7 @@
 
     <script>
         // Fetch personal records data
-        fetch('https://speedskatingresults.com/api/json/personal_records.php?skater=92774')  
+        fetch('./data/personal_records.json')  
             .then(response => response.json())
             .then(data => {
                 const records = data.records;
