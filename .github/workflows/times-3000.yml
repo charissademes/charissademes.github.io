@@ -2,7 +2,7 @@ name: fetch-3000m-times-for-charissa-de-mes
 
 on:
   schedule:
-    - cron: '3 2 * * *'  # Runs daily at 2 AM UTC
+    - cron: '20 2 * * *'  # Runs daily at 2 AM UTC
   workflow_dispatch:
 
 permissions:
