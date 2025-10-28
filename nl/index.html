@@ -2,12 +2,21 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Charissa de Mes - Dames Junior B2</title>
-    <link href="https://fonts.googleapis.com/css2?family=Gabarito&display=swap" rel="stylesheet">
+    <title>Charissa de Mes - Langebaanschaatster</title>
+    <link rel="icon" type="image/x-icon" href="/media/favicon.ico">
+    <link href="https://fonts.googleapis.com/css2?family=Oregano:ital@0;1&family=Quicksand:wght@300..700&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
+        .flag-icon {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            font-size: 24px;
+            z-index: 1000;
+            cursor: pointer;
+        }
         body {
-            font-family: 'Gabarito', Arial, sans-serif;
+            font-family: 'Quicksand', Arial, sans-serif;
             background: url('/media/stadium.png') no-repeat center center fixed;
             background-size: cover;
             background-color: rgba(255, 255, 255, 0.6);
@@ -143,30 +152,45 @@
     </style>
 </head>
 <body>
+    <div class="flag-icon"><a href="/en/index.html" onmouseover="this.querySelector('img').style.transform='scale(1.1)';" onmouseout="this.querySelector('img').style.transform='scale(1)';"><img src="/media/en.png" style="width: 48px; height: 48px; transition: transform 0.2s ease; display: inline-block;"></a></div>
     <div class="wrapper">
         <div class="left-section">
             <div class="container">
                 <div class="grey-text">
-                    <img src="/media/charissa.png" alt="Charissa de Mes">
-                    <h1>Charissa de Mes</h1>
-                    <p><strong>Leeftijd:</strong> 16 jaar</p>
-                    <p><strong>Categorie:</strong> Dames Junioren B2</p>
-                    <p>Charissa is een gepassioneerde schaatsster met een sterke motivatie en tomeloze gedrevenheid. Jaar na jaar weet zij haar persoonlijke tijden te verbeteren, dankzij haar enorme doorzettingsvermogen en vastberadenheid. Dit seizoen werkt Charissa hard om haar grote doel te bereiken: deelname aan het NK schaatsen voor junioren. Met haar toewijding en groeiende prestaties is ze goed op weg om die droom waar te maken.</p>
-                    <br>
-                    <img src="/media/instagram.png" style="filter: invert(1); height: 48px; width: auto;">&nbsp;&nbsp;&nbsp;&nbsp;<img src="/media/tiktok.svg" style="filter: invert(1); height: 46px; width: 42px;">
+                    <img src="/media/charissa_small.png" alt="Charissa de Mes" style="float:left; height:300px; width:auto; display:block; margin-right:16px; margin-bottom:8px;">
+                    <div style="text-align: left; display: inline-block; float: left; margin-left: 4px; margin-top: 40px;">
+                        <h2>Charissa de Mes</h2>
+                        <p><strong>Leeftijd:</strong> 16</p>
+                        <p><strong>Categorie:</strong> Dames Junioren B2, langebaan</p>
+                        <p><strong>Club:</strong> HSC De Draai</p>
+                        <p><strong>Huidige team:</strong> Baanselectie Alkmaar</p>
+                    </div>
+                    
+                    <div style="clear: both; padding-top:8px; margin-top: 12px; margin-bottom: -12px; text-align: left;">
+                        <hr>
+                        <p><i>Charissa is een gepassioneerde schaatster met een sterke motivatie en een onvermoeibare drive. Jaar na jaar weet ze haar persoonlijke records te verbeteren dankzij haar enorme doorzettingsvermogen en vastberadenheid. Dit seizoen werkt Charissa hard aan haar grote doel: zich kwalificeren voor het Nederlands Kampioenschap in de categorie "Junioren". Met haar toewijding en steeds betere prestaties is ze goed op weg om die droom werkelijkheid te laten worden.</i></p>
+                        <hr>
+                        <br>
+                        <center><a href="https://www.instagram.com/charissademes/" target="_blank"
+                            onmouseover="this.querySelector('img').style.transform='scale(1.1)';"
+                            onmouseout="this.querySelector('img').style.transform='scale(1)';">
+                             <img src="/media/instagram.webp" style="height: 48px; width: auto; transition: transform 0.2s ease; display: inline-block;">
+                        </a></center>
+                        <!-- &nbsp;&nbsp;&nbsp;&nbsp;<img src="/media/tiktok.svg" style="filter: invert(1); height: 46px; width: 42px;"> -->
+                    </div>
                 </div>               
             </div>
 
             <div class="container">
-                <h2 class="grey-text">Persoonlijke records</h2>
+                <h2 class="grey-text">&#127941; Persoonlijke records</h2>
                 <br>
-                <div id="output">Ophalen persoonlijke records...</div>
+                <div id="output">Retrieving personal records...</div>
                 <br>
                 <text class="small-font">Bron: <a href="https://speedskatingresults.com/index.php?p=17&s=92774" target="_blank">speedskatingresults.com</a></text>
             </div>
 
             <div class="container">
-                <h2 class="grey-text">Aankomende wedstrijden</h2>
+                <h2 class="grey-text">&#128197; Aankomende wedstrijden</h2>
                 <br>
                 <div id="competitions-output">
                     <table id="competitions-table">
@@ -175,7 +199,7 @@
                                 <th>Naam</th>
                                 <th>Datum</th>
                                 <th>Tijd</th>
-                                <th>Plaats</th>
+                                <th>Locatie</th>
                                 <th>Details</th>
                             </tr>
                         </thead>
@@ -183,40 +207,109 @@
                             <!-- This will be populated dynamically -->
                         </tbody>
                     </table>
+
+                    <script>
+                        // Watch the table body and sort rows by Date (column 1) then Time (column 2)
+                        (function() {
+                            const tbody = document.querySelector('#competitions-table tbody');
+                            if (!tbody) return;
+
+                            function parseDateString(s) {
+                                if (!s) return new Date(0);
+                                // Try ISO or Date.parse first
+                                const parsed = Date.parse(s);
+                                if (!isNaN(parsed)) return new Date(parsed);
+
+                                // Try DD-MM-YYYY or DD/MM/YYYY
+                                const m = s.match(/(\d{1,2})[\/\-\s](\d{1,2})[\/\-\s](\d{2,4})/);
+                                if (m) {
+                                    let day = m[1].padStart(2, '0');
+                                    let month = m[2].padStart(2, '0');
+                                    let year = m[3].length === 2 ? '20' + m[3] : m[3];
+                                    return new Date(`${year}-${month}-${day}`);
+                                }
+
+                                // Fallback
+                                return new Date(s);
+                            }
+
+                            function parseTimeString(s) {
+                                if (!s) return {h:0,m:0};
+                                const m = s.match(/(\d{1,2}):(\d{2})/);
+                                if (m) return {h: parseInt(m[1],10), m: parseInt(m[2],10)};
+                                return {h:0,m:0};
+                            }
+
+                            function rowDateTimeValue(row) {
+                                const dateText = row.children[1]?.innerText?.trim() || '';
+                                const timeText = row.children[2]?.innerText?.trim() || '';
+                                const d = parseDateString(dateText);
+                                const t = parseTimeString(timeText);
+                                d.setHours(t.h, t.m, 0, 0);
+                                return d.getTime();
+                            }
+
+                            const observer = new MutationObserver((mutations, obs) => {
+                                // Only proceed when there is at least one row
+                                if (tbody.children.length === 0) return;
+
+                                // Disconnect to avoid reacting to our own reordering
+                                obs.disconnect();
+
+                                const rows = Array.from(tbody.querySelectorAll('tr'));
+                                rows.sort((r1, r2) => {
+                                    const v1 = rowDateTimeValue(r1);
+                                    const v2 = rowDateTimeValue(r2);
+                                    return v1 - v2; // ascending: earliest date/time first
+                                });
+
+                                // Re-append in sorted order
+                                tbody.innerHTML = '';
+                                rows.forEach(r => tbody.appendChild(r));
+                            });
+
+                            observer.observe(tbody, { childList: true, subtree: false });
+                        })();
+                    </script>
                 </div>
                 <br>
                 <text class="small-font">Bron: <a href="https://inschrijven.schaatsen.nl/#/wedstrijden" target="_blank">inschrijven.schaatsen.nl</a></text>
             </div>
 
             <div class="container">
-                <h2 class="grey-text">Sponsors</h2>
+                <h2 class="grey-text">&#128150; Sponsors</h2>
                 <br>
-                <img src="/media/sponsor_example1.png" style="border-radius: 0px; height: 100px; width: auto;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="/media/sponsor_example2.png" style="border-radius: 0px; height: 100px; width: auto;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="/media/sponsor_example3.png" style="border-radius: 0px; height: 100px; width: auto;">
+                <img src="/media/sponsor_example1.png" style="border-radius: 0px; height: 140px; width: auto;">
+                <!-- <img src="/media/height40_hm_sponsor_example1.png" style="display:block; width:50%; max-width:100%; height:auto; margin:0 auto; border-radius:0;"> -->
             </div>
         </div>
 
         <div class="charts-container">
-            <h2>500m</h2>
-            <hr size="-1">
+            <center><h2>&#128200; Statistieken</h2></center>
+            <br>
+            <h3 style="margin: 0 0 4px 0;">500m</h3>
+            <hr style="margin: 4px 0 12px 0; border: 0; height: 1px; background: rgba(0,0,0,0.2);">
             <canvas id="resultsChart500"></canvas>
             <br>
-            <h2>1000m</h2>
-            <hr size="-1">
+            <h3 style="margin: 0 0 4px 0;">1000m</h3>
+            <hr style="margin: 4px 0 12px 0; border: 0; height: 1px; background: rgba(0,0,0,0.2);">
             <canvas id="resultsChart1000"></canvas>
             <br>
-            <h2>1500m</h2>
-            <hr size="-1">
+            <h3 style="margin: 0 0 4px 0;">1500m</h3>
+            <hr style="margin: 4px 0 12px 0; border: 0; height: 1px; background: rgba(0,0,0,0.2);">
             <canvas id="resultsChart1500"></canvas>
             <br>
-            <h2>3000m</h2>
-            <hr size="-1">
+            <h3 style="margin: 0 0 4px 0;">3000m</h3>
+            <hr style="margin: 4px 0 12px 0; border: 0; height: 1px; background: rgba(0,0,0,0.2);">
             <canvas id="resultsChart3000"></canvas>
+            <br><br>
+            <center><text class="small-font" style="color: #000000">Bron: <a href="https://speedskatingresults.com/index.php?p=17&s=92774" target="_blank" style="color: #000000">speedskatingresults.com</a></text></center>
         </div>
     </div>
 
     <script>
         // Fetch personal records data
-        fetch('https://speedskatingresults.com/api/json/personal_records.php?skater=92774')  
+        fetch('/data/personalrecords.json')  
             .then(response => response.json())
             .then(data => {
                 const records = data.records;
@@ -252,7 +345,7 @@
                             <td>${comp.date}</td>
                             <td>${comp.time}</td>
                             <td>${comp.city}</td>
-                            <td style="text-align: center;"><a href="${comp.url}" target="_blank" style="color: #000000; text-decoration: none; font-size: 24px;">&#128712;</a></td>
+                            <td style="text-align: center;"><a href="${comp.url}" target="_blank" style="color: #000000; text-decoration: none; font-size: 24px;">&#128279;</a></td>
                         `;
                         tableBody.appendChild(row);
                     });
@@ -263,7 +356,7 @@
             .catch(error => {
                 console.error('Error fetching data:', error);
                 const tableBody = document.querySelector('#competitions-table tbody');
-                tableBody.innerHTML = '<tr><td colspan="5">Kon wedstrijden niet laden.</td></tr>';
+                tableBody.innerHTML = '<tr><td colspan="5">Could not load competitions.</td></tr>';
             });
 
         function parseTimeToSeconds(timeStr) {
@@ -298,7 +391,7 @@
         }
 
         async function fetchAndRenderChart(distance, chartId, color) {
-            const response = await fetch(`https://speedskatingresults.com/api/json/skater_results.php?skater=92774&distance=${distance}`);
+            const response = await fetch(`/data/${distance}.json`);
             const data = await response.json();
 
             if (!data.results || data.results.length === 0) return;
@@ -306,44 +399,51 @@
             data.results.sort((a, b) => new Date(a.date) - new Date(b.date));
             const labels = [], times = [], locations = [];
             data.results.forEach(result => {
-                labels.push(result.date);
-                locations.push(result.location);
-                const totalSeconds = parseTimeToSeconds(result.time);
-                times.push(totalSeconds);
+            labels.push(result.date);
+            locations.push(result.location);
+            const totalSeconds = parseTimeToSeconds(result.time);
+            times.push(totalSeconds);
             });
 
             const ctx = document.getElementById(chartId).getContext('2d');
             new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: labels,
-                    datasets: [{
-                        label: 'Tijd (sec.)',
-                        data: times,
-                        borderColor: color,
-                        fill: false,
-                        tension: 0.1
-                    }]
-                },
-                options: {
-                    plugins: {
-                        tooltip: {
-                            callbacks: {
-                                label: context => {
-                                    const totalSec = context.raw;
-                                    const formattedTime = formatSecondsToTime(totalSec);
-                                    return `Tijd: ${formattedTime}`;
-                                },
-                                afterLabel: context => `Locatie: ${locations[context.dataIndex]}`
-                            }
-                        },
-                        legend: { labels: { font: { family: 'Gabarito' } } }
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [{
+                label: 'Tijd (sec.)',
+                data: times,
+                borderColor: color,
+                fill: false,
+                tension: 0.1
+                }]
+            },
+            options: {
+                plugins: {
+                tooltip: {
+                    titleFont: { family: 'Quicksand' },
+                    bodyFont: { family: 'Quicksand' },
+                    footerFont: { family: 'Quicksand' },
+                    callbacks: {
+                    label: context => {
+                        const totalSec = context.raw;
+                        const formattedTime = formatSecondsToTime(totalSec);
+                        return ` Tijd: ${formattedTime}`;
                     },
-                    scales: {
-                        x: { ticks: { autoSkip: true, maxTicksLimit: 10, font: { family: 'Gabarito' } }},
-                        y: { beginAtZero: false, title: { display: true, text: 'Seconden', font: { family: 'Gabarito' } } }
+                    afterLabel: context => ` Locatie: ${locations[context.dataIndex]}`
                     }
+                },
+                legend: { labels: { font: { family: 'Quicksand' } } }
+                },
+                scales: {
+                x: { ticks: { autoSkip: true, maxTicksLimit: 10, font: { family: 'Quicksand' } }},
+                y: {
+                    beginAtZero: false,
+                    title: { display: true, text: 'Seconden', font: { family: 'Quicksand' } },
+                    ticks: { font: { family: 'Quicksand' } }
                 }
+                }
+            }
             });
         }
 
