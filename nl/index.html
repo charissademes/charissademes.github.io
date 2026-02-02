@@ -401,6 +401,61 @@
             }
         }
 
+        /**
+         * Marks "PR" on every point that is lower than any previous point in the same dataset.
+         * Works for line charts with numeric y-values.
+         */
+        const prMarkerPlugin = {
+        id: 'prMarkerPlugin',
+        afterDatasetsDraw(chart, args, pluginOptions) {
+            const { ctx } = chart;
+            const datasetIndex = pluginOptions?.datasetIndex ?? 0; // default: first dataset
+            const text = pluginOptions?.text ?? 'PR';
+            const dx = pluginOptions?.dx ?? 8;   // x offset from point
+            const dy = pluginOptions?.dy ?? -8;  // y offset from point
+            const font = pluginOptions?.font ?? 'bold 12px Quicksand';
+            const color = pluginOptions?.color ?? '#000';
+
+            const meta = chart.getDatasetMeta(datasetIndex);
+            if (!meta || meta.hidden) return;
+
+            const data = chart.data.datasets?.[datasetIndex]?.data;
+            if (!Array.isArray(data) || data.length === 0) return;
+
+            let bestSoFar = Infinity;
+
+            ctx.save();
+            ctx.font = font;
+            ctx.fillStyle = color;
+            ctx.textAlign = 'left';
+            ctx.textBaseline = 'middle';
+
+            for (let i = 0; i < data.length; i++) {
+            const yVal = Number(data[i]);
+            if (!Number.isFinite(yVal)) continue;
+
+            // Only mark if strictly better (lower) than all previous.
+            if (yVal < bestSoFar) {
+                bestSoFar = yVal;
+
+                const point = meta.data[i];
+                if (!point) continue;
+
+                // Don't clutter the very first point unless you want it:
+                if (pluginOptions?.skipFirst && i === 0) continue;
+
+                // Draw text next to the point
+                ctx.fillText(text, point.x + dx, point.y + dy);
+            }
+            }
+
+            ctx.restore();
+        }
+        };
+
+        // Register once (global)
+        Chart.register(prMarkerPlugin);
+
         async function fetchAndRenderChart(distance, chartId, color) {
             const response = await fetch(`/data/${distance}.json`);
             const data = await response.json();
@@ -431,6 +486,14 @@
             },
             options: {
                 plugins: {
+                prMarkerPlugin: {
+                    text: 'PR',
+                    font: '8px Quicksand',
+                    color: '#000',
+                    dx: -4,
+                    dy: -10,
+                    skipFirst: true   // optional: don't mark the first ever result as "PR"
+                },
                 tooltip: {
                     titleFont: { family: 'Quicksand' },
                     bodyFont: { family: 'Quicksand' },
