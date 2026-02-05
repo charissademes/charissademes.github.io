@@ -192,6 +192,37 @@
                 </div>               
             </div>
 
+          <div class="container">
+                <h2 class="grey-text">&#128248; Photos</h2>
+                <br>
+
+                <div class="thumbnails-gallery" style="display: flex; flex-wrap: wrap; gap: 16px; justify-content: center;">
+                    <div class="thumbnail-item" style="display: flex; flex-direction: column; align-items: center;">
+                        <img src="/media/nk-allround-junioren-ab-2026-03.jpg" alt="Charissa in actie" class="thumbnail-img" style="width: 120px; height: auto; border-radius: 8px; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.2);">
+                        <span class="thumbnail-caption" style="color: #fff; font-size: 13px; margin-top: 4px; display:none;">NK Allround 2026 Junioren A/B</span>
+                    </div>
+                    <div class="thumbnail-item" style="display: flex; flex-direction: column; align-items: center;">
+                        <img src="/media/nk-allround-junioren-ab-2026-01.jpg" alt="Op het podium" class="thumbnail-img" style="width: 120px; height: auto; border-radius: 8px; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.2);">
+                        <span class="thumbnail-caption" style="color: #fff; font-size: 13px; margin-top: 4px; display:none;">NK Allround 2026 Junioren A/B</span>
+                    </div>
+                    <div class="thumbnail-item" style="display: flex; flex-direction: column; align-items: center;">
+                        <img src="/media/nk-allround-junioren-ab-2026-02.jpg" alt="Training" class="thumbnail-img" style="width: 120px; height: auto; border-radius: 8px; cursor: pointer; box-shadow: 0 2px 8px rgba(0,0,0,0.2);">
+                        <span class="thumbnail-caption" style="color: #fff; font-size: 13px; margin-top: 4px; display:none;">NK Allround 2026 Junioren A/B</span>
+                    </div>
+                </div>
+
+                <!-- Modal for full-size image -->
+                <div id="photo-modal" style="display:none; position:fixed; z-index:2000; left:0; top:0; width:100vw; height:100vh; background:rgba(0,0,0,0.85); justify-content:center; align-items:center;">
+                    <div id="photo-modal-content" style="position:relative; max-width:80vw; max-height:80vh; display:flex; flex-direction:column; align-items:center;">
+                        <img id="modal-img" src="" alt="" style="width:80vw; height:auto; max-width:80vw; max-height:80vh; border-radius:12px; box-shadow:0 4px 24px rgba(0,0,0,0.5); background:#fff; object-fit:contain;">
+                        <div id="modal-footer" style="color:#fff; background:rgba(0,30,96,0.85); width:100%; text-align:center; padding:10px 0 6px 0; border-radius:0 0 12px 12px; font-size:16px; margin-top:-4px; display:none;"></div>
+                        <span id="modal-close" style="position:absolute; top:8px; right:16px; font-size:36px; color:#fff; cursor:pointer; font-weight:bold; text-shadow:0 2px 8px #000;">&times;</span>
+                    </div>
+                </div>
+                <text class="small-font">These beautiful photos are created by: <a href="https://www.flickr.com/photos/194023916@N03/albums/" target="_blank"><i>Focus by Hanneke</i></a></text>
+                <br>
+            </div>
+
             <div class="container">
                 <h2 class="grey-text">&#127941; Personal records</h2>
                 <br>
@@ -220,6 +251,50 @@
                     </table>
 
                     <script>
+
+                                // Modal logic for thumbnails
+                                document.addEventListener('DOMContentLoaded', function() {
+                                    const thumbnails = document.querySelectorAll('.thumbnail-img');
+                                    const modal = document.getElementById('photo-modal');
+                                    const modalImg = document.getElementById('modal-img');
+                                    const modalFooter = document.getElementById('modal-footer');
+                                    const modalClose = document.getElementById('modal-close');
+
+                                    thumbnails.forEach(function(img) {
+                                        img.addEventListener('click', function() {
+                                            modal.style.display = 'flex';
+                                            modalImg.src = img.src;
+                                            modalImg.alt = img.alt;
+                                            // Find the caption from the sibling span
+                                            const caption = img.parentElement.querySelector('.thumbnail-caption');
+                                            if (caption) {
+                                                modalFooter.textContent = caption.textContent;
+                                                modalFooter.style.display = 'block';
+                                            } else {
+                                                modalFooter.textContent = '';
+                                                modalFooter.style.display = 'none';
+                                            }
+                                        });
+                                    });
+
+                                    modalClose.addEventListener('click', function() {
+                                        modal.style.display = 'none';
+                                        modalImg.src = '';
+                                        modalFooter.textContent = '';
+                                        modalFooter.style.display = 'none';
+                                    });
+
+                                    // Also close modal when clicking outside the image
+                                    modal.addEventListener('click', function(e) {
+                                        if (e.target === modal) {
+                                            modal.style.display = 'none';
+                                            modalImg.src = '';
+                                            modalFooter.textContent = '';
+                                            modalFooter.style.display = 'none';
+                                        }
+                                    });
+                                });
+
                         // Watch the table body and sort rows by Date (column 1) then Time (column 2)
                         (function() {
                             const tbody = document.querySelector('#competitions-table tbody');
@@ -287,13 +362,13 @@
                 <text class="small-font">Source: <a href="https://inschrijven.schaatsen.nl/#/wedstrijden" target="_blank">inschrijven.schaatsen.nl</a></text>
             </div>
 
-            <div class="container">
+            <!-- <div class="container">
                 <h2 class="grey-text">&#128150; Sponsors</h2>
                 <br>
-                <!-- <img src="/media/sponsor_example1.png" style="border-radius: 0px; height: 140px; width: auto;"> -->
-                <!-- <a href="https://henselmans.nl/"><img src="/media/height40_hm_sponsor_example1.png" style="display:block; width:50%; max-width:100%; height:auto; margin:0 auto; border-radius:0;"></a> -->
+                <img src="/media/sponsor_example1.png" style="border-radius: 0px; height: 140px; width: auto;">
+                <a href="https://henselmans.nl/"><img src="/media/height40_hm_sponsor_example1.png" style="display:block; width:50%; max-width:100%; height:auto; margin:0 auto; border-radius:0;"></a>
                 <br>
-            </div>
+            </div> -->
         </div>
 
         <div class="charts-container">
