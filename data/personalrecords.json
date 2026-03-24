@@ -24,6 +24,12 @@
       "time": "4.42,52",
       "date": "2025-11-30",
       "location": "Heerenveen (NED)"
+    },
+    {
+      "distance": 5000,
+      "time": "8.23,17",
+      "date": "2026-03-22",
+      "location": "Enschede (NED)"
     }
   ]
 }
