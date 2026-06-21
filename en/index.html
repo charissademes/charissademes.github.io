@@ -323,6 +323,56 @@
             font-size: 18px;
         }
 
+        .story-intro {
+            color: var(--muted);
+            font-size: 18px;
+        }
+
+        .story-intro p {
+            color: inherit;
+            font-size: inherit;
+        }
+
+        .story-toggle {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            margin-top: 14px;
+            border: 0;
+            padding: 0;
+            background: transparent;
+            color: var(--sea);
+            font-family: inherit;
+            font-size: 16px;
+            font-weight: 900;
+            cursor: pointer;
+            text-decoration: underline;
+            text-underline-offset: 4px;
+        }
+
+        .story-toggle::after {
+            content: "";
+            width: 8px;
+            height: 8px;
+            border-right: 2px solid currentColor;
+            border-bottom: 2px solid currentColor;
+            transform: rotate(45deg) translateY(-2px);
+            transition: transform 180ms ease;
+        }
+
+        .story-toggle[aria-expanded="true"]::after {
+            transform: rotate(225deg) translateY(-2px);
+        }
+
+        .story-full {
+            display: none;
+            margin-top: 12px;
+        }
+
+        .story-full.is-open {
+            display: block;
+        }
+
         #verhaal .section-heading {
             grid-template-columns: repeat(12, 1fr);
             gap: 14px 18px;
@@ -330,7 +380,7 @@
         }
 
         #verhaal .section-heading > div,
-        #verhaal .section-heading > p {
+        #verhaal .section-heading > .story-intro {
             grid-column: 1 / span 7;
         }
 
@@ -763,7 +813,7 @@
             }
 
             #verhaal .section-heading > div,
-            #verhaal .section-heading > p {
+            #verhaal .section-heading > .story-intro {
                 grid-column: 1 / -1;
             }
 
@@ -916,7 +966,25 @@
                         <span class="section-kicker">About Charissa</span>
                         <h2>Focused on growth, rhythm, and courage.</h2>
                     </div>
-                    <p>Charissa is a passionate speedskater with a strong motivation and great perseverance. Year after year she improves her personal records and continues to develop on the long track.</p>
+                    <div class="story-intro">
+                        <p>Charissa is a passionate speedskater with a strong motivation and great perseverance. Year after year she improves her personal records and continues to develop on the long track.</p>
+                        <button class="story-toggle" type="button" aria-expanded="false" aria-controls="full-story">Full story</button>
+                        <p class="story-full" id="full-story">
+                            Hi, I am Charissa. I am 17 years old and I study teacher education (PABO, HBO) in Alkmaar.<br><br>
+
+                            My hobbies are meeting up with friends, cooking, and baking. But one hobby stands head and shoulders above the rest: speed skating. I have been skating since I was 7 years old. On my strap-on skates, wearing a thick coat and a hat, I stood at the ice rink in Alkmaar every Saturday morning for youth skating.<br><br>
+
+                            About 5 years ago it was time for the next step: competitive speed skating. I started relatively late and, as an A-pupil, I found myself among skaters who were much faster and stronger than I was. Winning was never my goal, though. I enjoyed the training sessions, and that was enough for me. I started to enjoy skating more and more and began training more often. At first I trained once a week, but then I started going to the ice rink 3 times a week to skate. Because of this I made big steps forward, and during my 2nd competition season I was allowed to train with the selection group. That paid off, and before long I was invited to take part in regional competitions.<br><br>
+
+                            This soon meant that I no longer only enjoyed training, but also enjoyed skating fast times and measuring myself against skaters my own age. In my 3rd competition season, I went to Thialf for the first time to experience the fast ice in Heerenveen. That had a positive effect, because in my 4th season I was invited to join the baanselectie. A big and exciting step. At the start of the season I never expected to compete in important races. Then, at the beginning of December, I was listed as a reserve for the national qualification race for the Dutch Allround Championships, and in February I qualified directly through the ranking for the national qualification race for both the Dutch Sprint Championships and the Dutch Long Distance Championships. I ended the season as 1st reserve for the Dutch Sprint Championships.<br><br>
+
+                            Although I had not expected to compete at Dutch Championships, it was still a bitter pill to swallow. With a new goal in mind, I fully committed myself last season to getting the best out of myself. I wanted only one thing: to qualify for the Dutch Allround Championships. We started training in October, and at the beginning of January I was on the start line of the national qualification race for the Dutch Allround Championships. This takes place over a weekend in which all participants skate 3 distances. Who eventually gets to compete at the Dutch Championships depends on the final classification. Both days went well for me, which meant that within the first 2 months of the season I had already achieved my goal. That was not a reason for me to sit back. Several Dutch Championships are held during a season.<br><br>
+
+                            In February I once again had a race weekend on the schedule in which I had to skate 3 distances. This time it was for 2 different Dutch Championships. On Saturday, the places for the sprint were awarded, and on Sunday the places for the long distances. Unfortunately, I did not feel well on Saturday, so I only qualified as a reserve for the Dutch Sprint Championships. I then focused completely on the long distances. I managed to qualify. Because others had withdrawn from the sprint, I was still able to skate there as well. The Dutch Sprint Championships and the Dutch Long Distance Championships always take place during the same weekend, so I had a busy weekend ahead with 5 distances on the schedule.<br><br>
+
+                            That is how I ended the season by skating at 3 individual Dutch Championships. This earned me a talent status awarded by NOC*NSF to talented young athletes. For the coming season, I have set myself another goal: skating at Dutch Championships.
+                        </p>
+                    </div>
                 </div>
 
                 <div class="story-grid">
@@ -1047,16 +1115,16 @@
                     <div>
                         <span class="section-kicker" style="color: var(--gold);">Sponsors</span>
                         <h2>Support on and off the track.</h2>
-                        <p>Sponsors make training, competitions, and growth possible. Without the support of my sponsors, this would not be possible.</p>
+                        <p>You never achieve success alone. The support of my sponsors provides an essential foundation for my training, competitions, and continued development as an athlete. Their contribution gives me the opportunity to seize opportunities, push my limits, and pursue my ambitions. I am incredibly grateful for their trust and support.</p>
                         <!-- <p style="margin-top: 18px;">
                             <a href="https://www.instagram.com/charissademes/" target="_blank" rel="noopener" class="button">Instagram</a>
                         </p> -->
                     </div>
                     <div class="sponsor-logos">
                         <!-- <img src="/media/sponsor_example1.png" alt="Sponsor">
-                        <img src="/media/sponsor_example2.png" alt="Sponsor">
-                        <img src="/media/sponsor_example3.png" alt="Sponsor"> -->
-                        <img src="/media/height40_hm_sponsor_example1.png" alt="Sponsor">
+                        <img src="/media/sponsor_example2.png" alt="Sponsor"> -->
+                        <img src="/media/sponsor_example3.png" alt="Sponsor">
+                        <!-- <img src="/media/height40_hm_sponsor_example1.png" alt="Sponsor"> -->
                     </div>
                 </div>
             </section>
@@ -1492,6 +1560,17 @@
             });
         }
 
+        function initStoryToggle() {
+            const toggle = document.querySelector('.story-toggle');
+            const fullStory = document.getElementById('full-story');
+            if (!toggle || !fullStory) return;
+
+            toggle.addEventListener('click', () => {
+                const isOpen = fullStory.classList.toggle('is-open');
+                toggle.setAttribute('aria-expanded', String(isOpen));
+            });
+        }
+
         loadRecords();
         loadCompetitions();
         fetchAndRenderChart(500, 'resultsChart500', '#0e7774');
@@ -1501,6 +1580,7 @@
         initPhotoModal();
         initReveal();
         initAnchorNavigation();
+        initStoryToggle();
     </script>
 </body>
 </html>
