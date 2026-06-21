@@ -566,6 +566,7 @@
         }
 
         .chart-card {
+            position: relative;
             padding: 16px;
             border: 1px solid var(--line);
             border-radius: 8px;
@@ -582,6 +583,60 @@
             width: 100% !important;
             height: 310px !important;
             min-height: 0;
+        }
+
+        .chart-tooltip {
+            position: absolute;
+            z-index: 10;
+            min-width: 150px;
+            border: 1px solid currentColor;
+            border-radius: 8px;
+            padding: 10px 12px;
+            background: #122638;
+            color: #fff;
+            box-shadow: 0 14px 28px rgba(18, 38, 56, 0.22);
+            font-size: 13px;
+            font-weight: 700;
+            line-height: 1.35;
+            opacity: 0;
+            pointer-events: none;
+            transform: translate(-50%, calc(-100% - 12px));
+            transition: opacity 120ms ease;
+            white-space: nowrap;
+        }
+
+        .chart-tooltip-title {
+            margin-bottom: 5px;
+            color: #fff;
+            font-size: 12px;
+        }
+
+        .chart-tooltip,
+        .chart-tooltip * {
+            color: #fff;
+        }
+
+        .chart-tooltip-row {
+            display: flex;
+            align-items: center;
+            gap: 7px;
+        }
+
+        .chart-tooltip-pr {
+            display: inline-grid;
+            place-items: center;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: #fff;
+            color: #122638;
+            font-size: 10px;
+            font-weight: 900;
+            line-height: 1;
+        }
+
+        .chart-tooltip .chart-tooltip-pr {
+            color: #122638;
         }
 
         .photo-wall {
@@ -1060,7 +1115,7 @@
 
                     <section class="chart-panel">
                         <div class="panel-title">
-                            <h3>Statistieken</h3>
+                            <h3>Statistieken (tot 2 jaar terug)</h3>
                         </div>
                         <div class="chart-stack">
                             <div class="chart-card">
@@ -1233,6 +1288,83 @@
                 const color = pluginOptions?.color ?? '#e06052';
                 const fill = pluginOptions?.fill ?? '#122638';
                 const textColor = pluginOptions?.textColor ?? '#ffffff';
+                const pointClearance = pluginOptions?.pointClearance ?? 10;
+                const allPoints = meta.data
+                    .filter(point => point && Number.isFinite(point.x) && Number.isFinite(point.y))
+                    .map(point => ({ x: point.x, y: point.y }));
+
+                function labelRect(label) {
+                    return {
+                        left: label.x - labelWidth / 2,
+                        right: label.x + labelWidth / 2,
+                        top: label.y - labelHeight / 2,
+                        bottom: label.y + labelHeight / 2
+                    };
+                }
+
+                function overlapsPoint(label, point) {
+                    const rect = labelRect(label);
+                    return point.x >= rect.left - pointClearance
+                        && point.x <= rect.right + pointClearance
+                        && point.y >= rect.top - pointClearance
+                        && point.y <= rect.bottom + pointClearance;
+                }
+
+                function overlapsLabel(label, placedLabel) {
+                    const a = labelRect(label);
+                    const b = labelRect(placedLabel);
+                    return a.left < b.right + 8
+                        && a.right > b.left - 8
+                        && a.top < b.bottom + 8
+                        && a.bottom > b.top - 8;
+                }
+
+                function clampLabel(label) {
+                    return {
+                        x: Math.max(chartArea.left + labelWidth / 2, Math.min(chartArea.right - labelWidth / 2, label.x)),
+                        y: Math.max(chartArea.top + labelHeight / 2, Math.min(chartArea.bottom - labelHeight / 2, label.y))
+                    };
+                }
+
+                function connectorStart(label, point) {
+                    const rect = labelRect(label);
+                    const dx = point.x - label.x;
+                    const dy = point.y - label.y;
+
+                    if (Math.abs(dx) > Math.abs(dy)) {
+                        return {
+                            x: dx > 0 ? rect.right : rect.left,
+                            y: Math.max(rect.top + 4, Math.min(rect.bottom - 4, point.y))
+                        };
+                    }
+
+                    return {
+                        x: Math.max(rect.left + 4, Math.min(rect.right - 4, point.x)),
+                        y: dy > 0 ? rect.bottom : rect.top
+                    };
+                }
+
+                function distanceToSegment(point, start, end) {
+                    const dx = end.x - start.x;
+                    const dy = end.y - start.y;
+                    const lengthSquared = dx * dx + dy * dy;
+                    if (lengthSquared === 0) return Math.hypot(point.x - start.x, point.y - start.y);
+
+                    const t = Math.max(0, Math.min(1, ((point.x - start.x) * dx + (point.y - start.y) * dy) / lengthSquared));
+                    const projection = {
+                        x: start.x + t * dx,
+                        y: start.y + t * dy
+                    };
+                    return Math.hypot(point.x - projection.x, point.y - projection.y);
+                }
+
+                function connectorHitsOtherPoint(label, targetPoint) {
+                    const start = connectorStart(label, targetPoint);
+                    return allPoints.some(chartPoint => {
+                        const isTarget = Math.abs(chartPoint.x - targetPoint.x) < 0.5 && Math.abs(chartPoint.y - targetPoint.y) < 0.5;
+                        return !isTarget && distanceToSegment(chartPoint, start, targetPoint) < pointClearance;
+                    });
+                }
 
                 ctx.save();
                 ctx.font = pluginOptions?.font ?? '800 11px Gabarito';
@@ -1262,23 +1394,44 @@
                             return;
                         }
 
-                        const above = visibleCount % 2 === 0;
-                        let labelX = point.x + 8;
-                        let labelY = point.y + (above ? -30 : 30);
+                        const labelDistance = 34;
+                        const sideDistance = labelWidth / 2 + 16;
+                        const candidates = [
+                            { x: point.x, y: point.y - labelDistance },
+                            { x: point.x, y: point.y + labelDistance },
+                            { x: point.x + sideDistance, y: point.y - 18 },
+                            { x: point.x - sideDistance, y: point.y - 18 },
+                            { x: point.x + sideDistance, y: point.y + 18 },
+                            { x: point.x - sideDistance, y: point.y + 18 }
+                        ].map(clampLabel);
 
-                        labelX = Math.max(chartArea.left + labelWidth / 2, Math.min(chartArea.right - labelWidth / 2, labelX));
-                        labelY = Math.max(chartArea.top + labelHeight / 2, Math.min(chartArea.bottom - labelHeight / 2, labelY));
+                        const label = candidates.find(candidate => {
+                            return !placedLabels.some(placedLabel => overlapsLabel(candidate, placedLabel))
+                                && !allPoints.some(chartPoint => overlapsPoint(candidate, chartPoint))
+                                && !connectorHitsOtherPoint(candidate, point);
+                        });
 
-                        const pointerY = labelY + (above ? labelHeight / 2 : -labelHeight / 2);
+                        if (!label) {
+                            ctx.beginPath();
+                            ctx.arc(point.x, point.y, 5, 0, Math.PI * 2);
+                            ctx.fillStyle = color;
+                            ctx.fill();
+                            return;
+                        }
+
+                        const connector = connectorStart(label, point);
+                        ctx.save();
                         ctx.beginPath();
-                        ctx.moveTo(point.x, point.y);
-                        ctx.lineTo(labelX, pointerY);
+                        ctx.setLineDash([2, 4]);
+                        ctx.moveTo(connector.x, connector.y);
+                        ctx.lineTo(point.x, point.y);
                         ctx.strokeStyle = color;
-                        ctx.lineWidth = 1.4;
+                        ctx.lineWidth = 1;
                         ctx.stroke();
+                        ctx.restore();
 
                         ctx.beginPath();
-                        ctx.roundRect(labelX - labelWidth / 2, labelY - labelHeight / 2, labelWidth, labelHeight, 11);
+                        ctx.roundRect(label.x - labelWidth / 2, label.y - labelHeight / 2, labelWidth, labelHeight, 11);
                         ctx.fillStyle = fill;
                         ctx.fill();
                         ctx.strokeStyle = color;
@@ -1286,7 +1439,7 @@
                         ctx.stroke();
 
                         ctx.fillStyle = textColor;
-                        ctx.fillText('PR', labelX, labelY + 0.5);
+                        ctx.fillText('PR', label.x, label.y + 0.5);
 
                         ctx.beginPath();
                         ctx.arc(point.x, point.y, 5.5, 0, Math.PI * 2);
@@ -1296,7 +1449,7 @@
                         ctx.lineWidth = 2.4;
                         ctx.stroke();
 
-                        placedLabels.push({ x: labelX, y: labelY });
+                        placedLabels.push(label);
                         visibleCount += 1;
                     }
                 });
@@ -1365,6 +1518,42 @@
             }
         }
 
+        function renderChartTooltip(context, locations, prFlags) {
+            const { chart, tooltip } = context;
+            const chartCard = chart.canvas.parentNode;
+            let tooltipElement = chartCard.querySelector('.chart-tooltip');
+
+            if (!tooltipElement) {
+                tooltipElement = document.createElement('div');
+                tooltipElement.className = 'chart-tooltip';
+                chartCard.appendChild(tooltipElement);
+            }
+
+            if (tooltip.opacity === 0) {
+                tooltipElement.style.opacity = '0';
+                return;
+            }
+
+            const dataPoint = tooltip.dataPoints?.[0];
+            if (!dataPoint) return;
+
+            const isPr = prFlags[dataPoint.dataIndex];
+            tooltipElement.style.borderColor = dataPoint.dataset.borderColor;
+            tooltipElement.innerHTML = `
+                <div class="chart-tooltip-title">${dataPoint.label}</div>
+                <div class="chart-tooltip-row">
+                    <span>Tijd: ${formatSecondsToTime(dataPoint.raw)}</span>
+                    ${isPr ? '<span class="chart-tooltip-pr">PR</span>' : ''}
+                </div>
+                <div>Locatie: ${locations[dataPoint.dataIndex]}</div>
+            `;
+
+            const { offsetLeft, offsetTop } = chart.canvas;
+            tooltipElement.style.opacity = '1';
+            tooltipElement.style.left = `${offsetLeft + tooltip.caretX}px`;
+            tooltipElement.style.top = `${offsetTop + tooltip.caretY}px`;
+        }
+
         async function fetchAndRenderChart(distance, chartId, color) {
             if (!window.Chart) {
                 document.querySelectorAll('.chart-card').forEach(card => {
@@ -1384,14 +1573,23 @@
                 if (!data.results || data.results.length === 0) return;
 
                 data.results.sort((a, b) => new Date(a.date) - new Date(b.date));
+                const latestResultDate = new Date(data.results[data.results.length - 1].date);
+                const earliestVisibleDate = new Date(latestResultDate);
+                earliestVisibleDate.setFullYear(earliestVisibleDate.getFullYear() - 2);
+                const visibleResults = data.results.filter(result => new Date(result.date) >= earliestVisibleDate);
                 const labels = [];
                 const times = [];
                 const locations = [];
+                const prFlags = [];
+                let bestVisibleTime = Infinity;
 
-                data.results.forEach(result => {
+                visibleResults.forEach(result => {
+                    const totalSeconds = parseTimeToSeconds(result.time);
                     labels.push(result.date);
                     locations.push(result.location);
-                    times.push(parseTimeToSeconds(result.time));
+                    times.push(totalSeconds);
+                    prFlags.push(times.length > 1 && totalSeconds < bestVisibleTime);
+                    bestVisibleTime = Math.min(bestVisibleTime, totalSeconds);
                 });
 
                 const ctx = document.getElementById(chartId).getContext('2d');
@@ -1442,20 +1640,8 @@
                                 minDistance: 62
                             },
                             tooltip: {
-                                enabled: true,
-                                displayColors: false,
-                                backgroundColor: '#122638',
-                                titleColor: '#ffffff',
-                                bodyColor: '#ffffff',
-                                borderColor: color,
-                                borderWidth: 1,
-                                padding: 12,
-                                caretSize: 7,
-                                callbacks: {
-                                    title: context => context[0]?.label ?? '',
-                                    label: context => ` Tijd: ${formatSecondsToTime(context.raw)}`,
-                                    afterLabel: context => ` Locatie: ${locations[context.dataIndex]}`
-                                }
+                                enabled: false,
+                                external: context => renderChartTooltip(context, locations, prFlags)
                             },
                             legend: {
                                 display: false
