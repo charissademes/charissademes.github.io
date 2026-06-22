@@ -136,6 +136,13 @@
             border-radius: 50%;
         }
 
+        .social-link img {
+            width: 28px;
+            height: 28px;
+            border-radius: 7px;
+            object-fit: contain;
+        }
+
         .hero {
             min-height: 94vh;
             display: grid;
@@ -833,6 +840,14 @@
                 display: none;
             }
 
+            .nav-links a.social-link,
+            .nav-links a.lang-link {
+                display: inline-flex;
+                flex: 0 0 auto;
+                min-height: 36px;
+                padding: 0 8px;
+            }
+
             .hero {
                 min-height: auto;
                 padding-top: 112px;
@@ -970,7 +985,9 @@
                 <a href="#fotos">Foto's</a>
                 <a href="#sponsors">Sponsors</a>
                 <a href="#wedstrijden">Wedstrijden</a>
-                <a href="https://www.instagram.com/charissademes/" target="_blank" rel="noopener">Instagram</a>
+                <a class="social-link" href="https://www.instagram.com/charissademes/" target="_blank" rel="noopener" aria-label="Instagram">
+                    <img src="/media/instagram.webp" alt="">
+                </a>
                 <a class="lang-link" href="/en/index.html" aria-label="English version">
                     <img src="/media/en.png" alt="English">
                 </a>
@@ -1171,6 +1188,7 @@
                         <span class="section-kicker" style="color: var(--gold);">Sponsors</span>
                         <h2>Steun langs de baan en daarbuiten.</h2>
                         <p>Succes bereik je nooit alleen. De steun van mijn sponsors vormt een onmisbare basis voor mijn trainingen, wedstrijden en verdere ontwikkeling als sporter. Hun bijdrage geeft mij de mogelijkheid om kansen te benutten, grenzen te verleggen en mijn ambities waar te maken. Voor dat vertrouwen ben ik enorm dankbaar.</p>
+                        <p>Wil jij ook bijdragen aan mijn succes? Bekijk mijn <a href="/sponsorplan-2026-2027.html" target="_blank" rel="noopener" style="color:#fff"><u>sponsorplan</u></a>.</p>
                         <!-- <p style="margin-top: 18px;">
                             <a href="https://www.instagram.com/charissademes/" target="_blank" rel="noopener" class="button">Instagram</a>
                         </p> -->
@@ -1178,7 +1196,7 @@
                     <div class="sponsor-logos">
                         <!-- <img src="/media/sponsor_example1.png" alt="Sponsor">
                         <img src="/media/sponsor_example2.png" alt="Sponsor"> -->
-                        <img src="/media/ivandemes_com.png" alt="IVANDEMES.com">
+                        <a href="https://www.ivandemes.com" target="_blank" rel="noopener"><img src="/media/ivandemes_com.png" alt="IVANDEMES.com"></a>
                         <!-- <img src="/media/height40_hm_sponsor_example1.png" alt="Sponsor"> -->
                     </div>
                 </div>
@@ -1214,7 +1232,7 @@
         </main>
 
         <footer class="footer">
-            Charissa de Mes - Langebaanschaatster
+            © Copyright <span id="current-year"></span> - Charissa de Mes
         </footer>
     </div>
 
@@ -1228,6 +1246,7 @@
 
     <script>
         document.documentElement.classList.add('js');
+        document.getElementById('current-year').textContent = new Date().getFullYear();
 
         const chartDefaults = {
             color: '#6c7879',
