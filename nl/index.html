@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Charissa de Mes - Langebaanschaatster</title>
     <link rel="icon" type="image/x-icon" href="/media/favicon.ico">
+    <link rel="preload" as="image" href="/media/optimized/stadium.webp">
+    <link rel="preload" as="image" href="/media/optimized/nk-allround-junioren-ab-2026-03.webp">
+    <link rel="preload" as="image" href="/media/optimized/charissa_small.webp">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Gabarito:wght@400..900&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
@@ -36,7 +39,7 @@
             color: var(--ink);
             background:
                 linear-gradient(180deg, rgba(247, 243, 235, 0.88), rgba(217, 238, 243, 0.72)),
-                url('/media/stadium.png') center top / cover fixed;
+                url('/media/optimized/stadium.webp') center top / cover fixed;
             font-family: "Gabarito", Arial, sans-serif;
             font-size: 16px;
             line-height: 1.5;
@@ -151,7 +154,7 @@
             color: #fff;
             background:
                 linear-gradient(90deg, rgba(18, 38, 56, 0.88) 0%, rgba(18, 38, 56, 0.54) 45%, rgba(18, 38, 56, 0.12) 100%),
-                url('/media/nk-allround-junioren-ab-2026-03.jpg') center / cover;
+                url('/media/optimized/nk-allround-junioren-ab-2026-03.webp') center / cover;
         }
 
         .hero-inner {
@@ -696,7 +699,7 @@
             align-items: center;
             background:
                 linear-gradient(135deg, rgba(18, 38, 56, 0.9), rgba(14, 119, 116, 0.88)),
-                url('/media/stadium.png') center / cover;
+                url('/media/optimized/stadium.webp') center / cover;
             color: #fff;
         }
 
@@ -986,10 +989,10 @@
                 <a href="#sponsors">Sponsors</a>
                 <a href="#wedstrijden">Wedstrijden</a>
                 <a class="social-link" href="https://www.instagram.com/charissademes/" target="_blank" rel="noopener" aria-label="Instagram">
-                    <img src="/media/instagram.webp" alt="">
+                    <img src="/media/optimized/instagram.webp" alt="" decoding="async">
                 </a>
                 <a class="lang-link" href="/en/index.html" aria-label="English version">
-                    <img src="/media/en.png" alt="English">
+                    <img src="/media/en.png" alt="English" decoding="async">
                 </a>
             </nav>
         </header>
@@ -1008,8 +1011,8 @@
                     </div>
 
                     <aside class="hero-card reveal" aria-label="Profiel">
-                        <img class="portrait" src="/media/charissa_small.png" alt="Charissa de Mes">
-                        <img class="goal-badge" src="/media/2025-2026-doel-bereikt.png" alt="Doel bereikt 2025-2026">
+                        <img class="portrait" src="/media/optimized/charissa_small.webp" alt="Charissa de Mes" fetchpriority="high" decoding="async">
+                        <img class="goal-badge" src="/media/optimized/2025-2026-doel-bereikt.webp" alt="Doel bereikt 2025-2026" decoding="async">
                         <div class="profile-list">
                             <div>
                                 <span>Leeftijd</span>
@@ -1060,31 +1063,31 @@
                 </div>
 
                 <div class="story-grid">
-                    <article class="story-card wide" style="background-image: url('/media/nk-allround-junioren-ab-2026-01.jpg');">
+                    <article class="story-card wide" style="background-image: url('/media/optimized/nk-allround-junioren-ab-2026-01.webp');">
                         <div>
                             <h3>NK Allround 2026</h3>
                             <p>Een seizoen waarin hard trainen zichtbaar werd in tijden, plaatsing en vertrouwen.</p>
                         </div>
                     </article>
-                    <article class="story-card tall" style="background-image: url('/media/charissa2024.png');">
+                    <article class="story-card tall" style="background-image: url('/media/optimized/charissa2024.webp');">
                         <div>
                             <h3>Elke ronde telt</h3>
                             <p>Techniek, rust en snelheid komen samen in de bocht en op het rechte eind.</p>
                         </div>
                     </article>
-                    <article class="story-card small" style="background-image: url('/media/nk-allround-junioren-ab-2026-02.jpg');">
+                    <article class="story-card small" style="background-image: url('/media/optimized/nk-allround-junioren-ab-2026-02.webp');">
                         <div>
                             <h3>Wedstrijdmoment</h3>
                             <p>Van voorbereiding naar uitvoering.</p>
                         </div>
                     </article>
-                    <article class="story-card small" style="background-image: url('/media/stadium.png');">
+                    <article class="story-card small" style="background-image: url('/media/optimized/stadium.webp');">
                         <div>
                             <h3>Thuis op het ijs</h3>
                             <p>Training, wedstrijden en nieuwe doelen.</p>
                         </div>
                     </article>
-                    <article class="story-card small" style="background-image: url('/media/charissa.png');">
+                    <article class="story-card small" style="background-image: url('/media/optimized/charissa.webp');">
                         <div>
                             <h3>Vooruit kijken</h3>
                             <p>Elke verbetering begint met opnieuw starten.</p>
@@ -1166,16 +1169,16 @@
                 </div>
 
                 <div class="photo-wall">
-                    <button class="photo-tile" type="button" data-full="/media/nk-allround-junioren-ab-2026-03.jpg" data-caption="NK Allround 2026 Junioren A/B">
-                        <img src="/media/nk-allround-junioren-ab-2026-03.jpg" alt="Charissa in actie">
+                    <button class="photo-tile" type="button" data-full="/media/optimized/nk-allround-junioren-ab-2026-03.webp" data-caption="NK Allround 2026 Junioren A/B">
+                        <img src="/media/optimized/nk-allround-junioren-ab-2026-03.webp" alt="Charissa in actie" loading="lazy" decoding="async">
                         <span>Focus</span>
                     </button>
-                    <button class="photo-tile" type="button" data-full="/media/nk-allround-junioren-ab-2026-01.jpg" data-caption="NK Allround 2026 Junioren A/B">
-                        <img src="/media/nk-allround-junioren-ab-2026-01.jpg" alt="Charissa op het ijs">
+                    <button class="photo-tile" type="button" data-full="/media/optimized/nk-allround-junioren-ab-2026-01.webp" data-caption="NK Allround 2026 Junioren A/B">
+                        <img src="/media/optimized/nk-allround-junioren-ab-2026-01.webp" alt="Charissa op het ijs" loading="lazy" decoding="async">
                         <span>Snelheid</span>
                     </button>
-                    <button class="photo-tile" type="button" data-full="/media/nk-allround-junioren-ab-2026-02.jpg" data-caption="NK Allround 2026 Junioren A/B">
-                        <img src="/media/nk-allround-junioren-ab-2026-02.jpg" alt="Charissa tijdens de wedstrijd">
+                    <button class="photo-tile" type="button" data-full="/media/optimized/nk-allround-junioren-ab-2026-02.webp" data-caption="NK Allround 2026 Junioren A/B">
+                        <img src="/media/optimized/nk-allround-junioren-ab-2026-02.webp" alt="Charissa tijdens de wedstrijd" loading="lazy" decoding="async">
                         <span>Volharding</span>
                     </button>
                 </div>
@@ -1196,7 +1199,7 @@
                     <div class="sponsor-logos">
                         <!-- <img src="/media/sponsor_example1.png" alt="Sponsor">
                         <img src="/media/sponsor_example2.png" alt="Sponsor"> -->
-                        <a href="https://www.ivandemes.com" target="_blank" rel="noopener"><img src="/media/ivandemes_com.png" alt="IVANDEMES.com"></a>
+                        <a href="https://www.ivandemes.com" target="_blank" rel="noopener"><img src="/media/optimized/ivandemes_com.webp" alt="IVANDEMES.com" loading="lazy" decoding="async"></a>
                         <!-- <img src="/media/height40_hm_sponsor_example1.png" alt="Sponsor"> -->
                     </div>
                 </div>
