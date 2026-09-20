@@ -1516,8 +1516,11 @@
             const tableBody = document.querySelector('#competitions-table tbody');
 
             try {
-                const response = await fetch('/data/competitions.json');
-                const data = await response.json();
+                const response = await fetch('/data/competitions.json', { cache: 'no-store' });
+                if (!response.ok) throw new Error('HTTP ' + response.status);
+                const entries = await response.json();
+                if (!Array.isArray(entries)) throw new Error('Invalid competition data');
+                const data = entries.filter(comp => !comp.starts || Date.parse(comp.starts) > Date.now());
 
                 if (!Array.isArray(data) || data.length === 0) {
                     tableBody.innerHTML = '<tr><td colspan="5">No upcoming competitions available.</td></tr>';
