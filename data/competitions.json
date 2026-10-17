@@ -1,18 +1,18 @@
 [
   {
-    "name": "Wedstrijd selecties BGA, Alkmaar en Hoorn",
-    "starts": "2026-10-17T18:00:00Z",
-    "date": "2026-10-17",
-    "time": "20:00",
-    "city": "Leeuwarden",
-    "url": "https://inschrijven.schaatsen.nl/#/wedstrijd/6f23798d-1896-487e-9167-f353d70ab59e/informatie"
-  },
-  {
     "name": "Schaatscircuit.nl - 20261018",
     "starts": "2026-10-18T15:00:00Z",
     "date": "2026-10-18",
     "time": "17:00",
     "city": "Heerenveen",
     "url": "https://inschrijven.schaatsen.nl/#/wedstrijd/5a07d7f8-afd6-459c-bab0-51ad032ad2c8/informatie"
+  },
+  {
+    "name": "Elfstedenhal PR wedstrijd 2 [open inschrijving] zondag 01 November 2026",
+    "starts": "2026-11-01T16:30:00Z",
+    "date": "2026-11-01",
+    "time": "17:30",
+    "city": "Leeuwarden",
+    "url": "https://inschrijven.schaatsen.nl/#/wedstrijd/70e006c1-b442-4da9-8982-5f80b8257577/informatie"
   }
 ]
