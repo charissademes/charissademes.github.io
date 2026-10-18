@@ -38,6 +38,13 @@
       "link": "http://speedskatingresults.com/index.php?p=3&e=29547&r=10001&s=92774"
     },
     {
+      "time": "43,84",
+      "date": "2026-10-17",
+      "location": "Leeuwarden (NED)",
+      "name": "Wedstrijd Selecties BGA, Alkmaar en Hoorn",
+      "link": "http://speedskatingresults.com/index.php?p=3&e=32175&r=10001&s=92774"
+    },
+    {
       "time": "43,90",
       "date": "2025-02-22",
       "location": "Heerenveen (NED)",
@@ -575,6 +582,13 @@
       "location": "Alkmaar (NED)",
       "name": "Clubwedstrijd HG Open",
       "link": "http://speedskatingresults.com/index.php?p=3&e=24290&r=10001&s=92774"
+    },
+    {
+      "time": "2.11,24",
+      "date": "2026-10-17",
+      "location": "Leeuwarden (NED)",
+      "name": "Wedstrijd Selecties BGA, Alkmaar en Hoorn",
+      "link": "http://speedskatingresults.com/index.php?p=3&e=32175&r=10002&s=92774"
     }
   ]
 }
