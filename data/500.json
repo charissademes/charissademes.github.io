@@ -3,6 +3,13 @@
   "distance": 500,
   "results": [
     {
+      "time": "43,30",
+      "date": "2026-10-18",
+      "location": "Heerenveen (NED)",
+      "name": "Schaatscircuit.nl",
+      "link": "http://speedskatingresults.com/index.php?p=3&e=32183&r=10001&s=92774"
+    },
+    {
       "time": "43,46",
       "date": "2026-03-08",
       "location": "Enschede (NED)",
@@ -24,11 +31,25 @@
       "link": "http://speedskatingresults.com/index.php?p=3&e=31603&r=10001&s=92774"
     },
     {
+      "time": "43,72",
+      "date": "2026-10-11",
+      "location": "Heerenveen (NED)",
+      "name": "Recordwedstrijd-1",
+      "link": "http://speedskatingresults.com/index.php?p=3&e=32150&r=10001&s=92774"
+    },
+    {
       "time": "43,84",
       "date": "2025-01-05",
       "location": "Heerenveen (NED)",
       "name": "Recordwedstrijd-8 Thialf",
       "link": "http://speedskatingresults.com/index.php?p=3&e=29547&r=10001&s=92774"
+    },
+    {
+      "time": "43,84",
+      "date": "2026-10-17",
+      "location": "Leeuwarden (NED)",
+      "name": "Wedstrijd Selecties BGA, Alkmaar en Hoorn",
+      "link": "http://speedskatingresults.com/index.php?p=3&e=32175&r=10001&s=92774"
     },
     {
       "time": "43,90",
